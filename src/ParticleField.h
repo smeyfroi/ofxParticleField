@@ -12,10 +12,10 @@ namespace ofxParticleField {
 
 class ParticleField {
 public:
-  void setup(int approxNumParticles); // we calculate actual numParticles as a square number
-  void update();
+  void setup(int approxNumParticles, ofFloatColor particleColor, glm::vec2 fieldSize); // we calculate actual numParticles as a square number
+  void update(const ofFbo& foregroundFbo);
   void draw(ofFbo& foregroundFbo);
-  void setFieldTexture(ofTexture&& tex);
+  void setFieldTexture(const ofFloatPixels& pixels);
   
 private:
   size_t numDataBuffers = 2; // position and velocity

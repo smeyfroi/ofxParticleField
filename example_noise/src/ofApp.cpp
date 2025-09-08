@@ -1,34 +1,29 @@
 #include "ofApp.h"
 
 
-static ofTexture makePerlin2DNoiseTexture(int w, int h, float scale) {
+static ofFloatPixels makePerlin2DNoise(int w, int h, float scale, float z) {
   ofFloatPixels pixels;
   pixels.allocate(w, h, OF_PIXELS_RGB);
   for (int y = 0; y < h; ++y) {
     for (int x = 0; x < w; ++x) {
-      float n1 = ofNoise(x * scale, y * scale);
-      float n2 = ofNoise((x+5000) * scale, (y+5000) * scale);
+      float n1 = ofNoise(x * scale, y * scale, z);
+      float n2 = ofNoise((x+5000) * scale, (y+5000) * scale, z);
       pixels.setColor(x, y, ofFloatColor(n1, n2, 0.0, 0.0));
     }
   }
-  ofTexture texture;
-  texture.allocate(pixels);
-  texture.loadData(pixels);
-  return texture;
+  return pixels;
 }
 
 
 //--------------------------------------------------------------
 void ofApp::setup(){
   ofBackground(0);
-  ofSetFrameRate(60);
+  ofSetFrameRate(30);
+  glEnable(GL_PROGRAM_POINT_SIZE);
   
-  particleField.setup(100'000);
+  particleField.setup(500'000, ofFloatColor(0.5, 0.3, 1.0, 0.7), {fieldWidth, fieldHeight});
   
-  fieldTexture = makePerlin2DNoiseTexture(200, 200, 0.01);
-  particleField.setFieldTexture(std::move(fieldTexture));
-  
-  foregroundFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
+  foregroundFbo.allocate(ofGetWidth()*2.0, ofGetHeight()*2.0, GL_RGBA);
   foregroundFbo.begin();
   ofClear(0, 0, 0, 255);
   foregroundFbo.end();
@@ -36,7 +31,8 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-  particleField.update();
+  particleField.setFieldTexture(makePerlin2DNoise(fieldWidth, fieldHeight, 0.01, ofGetElapsedTimef() * 0.1));
+  particleField.update(foregroundFbo);
 }
 
 //--------------------------------------------------------------
@@ -44,6 +40,7 @@ void ofApp::draw(){
   particleField.draw(foregroundFbo);
 
   ofSetColor(255);
+  ofEnableBlendMode(OF_BLENDMODE_ALPHA);
   foregroundFbo.draw(0.0, 0.0, ofGetWindowWidth(), ofGetWindowHeight());
 
   ofSetColor(255);

@@ -17,13 +17,14 @@ namespace ofxParticleField {
 class UpdateShader : public Shader {
   
 public:
-  void render(PingPongFbo& particleData) override {
+  void render(PingPongFbo& particleData, ofTexture& fieldTexture) {
     particleData.getTarget().begin();
     particleData.getTarget().activateAllDrawBuffers();
     shader.begin();
     shader.setUniformTexture("positionData", particleData.getSource().getTexture(POSITION_DATA_INDEX), 0);
     shader.setUniformTexture("velocityData", particleData.getSource().getTexture(VELOCITY_DATA_INDEX), 1);
-    shader.setUniform1f("maxVelocity", 0.01f);
+    shader.setUniformTexture("fieldTexture", fieldTexture, 2); // FIXME: put `2` into Constants?
+    shader.setUniform1f("maxVelocity", 0.001f);
     particleData.getSource().draw(0, 0);
     shader.end();
     particleData.getTarget().end();
@@ -48,17 +49,24 @@ protected:
   std::string getFragmentShader() override {
     return GLSL(
                 in vec2 texCoordVarying;
-                uniform float maxVelocity;
                 uniform sampler2DRect positionData;
                 uniform sampler2DRect velocityData;
+                uniform sampler2D fieldTexture;
+                uniform float maxVelocity;
                 layout(location = 0) out vec4 outPosition;
                 layout(location = 1) out vec4 outVelocity;
                 
                 void main(void) {
-                  vec2 position = texture(positionData, texCoordVarying).xy;
+                  vec2 normalizedParticlePosition = texture(positionData, texCoordVarying).xy;
                   vec2 velocity = texture(velocityData, texCoordVarying).xy;
+                  vec2 field = texture(fieldTexture, normalizedParticlePosition).xy;
+
+                  float velocityDamping = 0.999;
+                  float forceMultiplier = 0.01;
+                  velocity = velocity + (field - 0.5) * forceMultiplier;
+                  velocity *= velocityDamping;
                   
-                  outPosition = vec4(position + velocity*maxVelocity, 0.0, 1.0);
+                  outPosition = vec4(fract(normalizedParticlePosition + velocity*maxVelocity), 0.0, 1.0);
                   outVelocity = vec4(velocity, 0.0, 1.0);
                 }
                 );
