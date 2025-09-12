@@ -22,6 +22,7 @@ public:
     ofClear(0, 0, 0, 0);
     shader.begin();
     shader.setUniformTexture("positionData", particleData.getSource().getTexture(POSITION_DATA_INDEX), 0);
+    shader.setUniformTexture("velocityData", particleData.getSource().getTexture(VELOCITY_DATA_INDEX), 1);
     shader.setUniform1i("renderW", fbo.getWidth());
     shader.setUniform1i("renderH", fbo.getHeight());
     shader.setUniform1f("pointSize", pointSize);
@@ -61,6 +62,7 @@ protected:
     return GLSL(
                 in vec2 texCoordVarying;
                 in vec4 colorVarying;
+                uniform sampler2DRect velocityData;
                 out vec4 fragColor;
                 
                 void main(void) {
@@ -70,8 +72,13 @@ protected:
                   if (r > 1.0) {
                     discard;
                   }
+                  
+                  vec4 particleVelocity = texture(velocityData, texCoordVarying);
+                  float speed = length(particleVelocity.xy);
+                  speed = smoothstep(0.0, 1.0, speed * 1.0);
+
                   // set alpha according to distance to center
-                  float alpha = 1.0 - r;
+                  float alpha = clamp(speed - r, 0.0, 1.0);
                   fragColor = colorVarying;
                   fragColor.a *= alpha;
                 }

@@ -9,7 +9,8 @@ namespace ofxParticleField {
 
 
 
-void ParticleField::setup(int approxNumParticles, ofFloatColor particleColor) {
+void ParticleField::setup(int approxNumParticles, ofFloatColor particleColor, float fieldValueOffset_) {
+  fieldValueOffset = fieldValueOffset_;
   size_t particleDataW = (size_t)std::sqrt((float)approxNumParticles);
   size_t particleDataH = approxNumParticles / particleDataW;
   
@@ -101,7 +102,7 @@ void ParticleField::setFieldTexture(const ofFloatPixels& pixels) {
 }
 
 void ParticleField::update() {
-  updateShader.render(particleDataFbo, fieldTexture, velocityDampingParameter, forceMultiplierParameter, maxVelocityParameter);
+  updateShader.render(particleDataFbo, fieldTexture, velocityDampingParameter, forceMultiplierParameter, maxVelocityParameter, fieldValueOffset);
 }
 
 void ParticleField::draw(ofFbo& foregroundFbo) {

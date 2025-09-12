@@ -17,7 +17,7 @@ namespace ofxParticleField {
 class UpdateShader : public Shader {
   
 public:
-  void render(PingPongFbo& particleData, ofTexture& fieldTexture, float velocityDamping, float forceMultiplier, float maxVelocity) {
+  void render(PingPongFbo& particleData, ofTexture& fieldTexture, float velocityDamping, float forceMultiplier, float maxVelocity, float fieldValueOffset) {
     particleData.getTarget().begin();
     particleData.getTarget().activateAllDrawBuffers();
     shader.begin();
@@ -27,6 +27,7 @@ public:
     shader.setUniform1f("velocityDamping", velocityDamping);
     shader.setUniform1f("forceMultiplier", forceMultiplier);
     shader.setUniform1f("maxVelocity", maxVelocity);
+    shader.setUniform1f("fieldValueOffset", fieldValueOffset);
     particleData.getSource().draw(0, 0);
     shader.end();
     particleData.getTarget().end();
@@ -57,6 +58,7 @@ protected:
                 uniform float velocityDamping;
                 uniform float forceMultiplier;
                 uniform float maxVelocity;
+                uniform float fieldValueOffset;
                 layout(location = 0) out vec4 outPosition;
                 layout(location = 1) out vec4 outVelocity;
                 
@@ -65,7 +67,7 @@ protected:
                   vec2 velocity = texture(velocityData, texCoordVarying).xy;
                   vec2 field = texture(fieldTexture, normalizedParticlePosition).xy;
 
-                  velocity = velocity + (field - 0.5) * forceMultiplier;
+                  velocity = velocity + (field + fieldValueOffset) * forceMultiplier;
                   velocity *= velocityDamping;
                   
                   outPosition = vec4(fract(normalizedParticlePosition + velocity*maxVelocity), 0.0, 1.0);

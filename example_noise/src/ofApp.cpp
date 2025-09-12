@@ -21,7 +21,7 @@ void ofApp::setup(){
   ofSetFrameRate(30);
   glEnable(GL_PROGRAM_POINT_SIZE);
   
-  particleField.setup(500'000, ofFloatColor(0.5, 0.3, 1.0, 0.7));
+  particleField.setup(500'000, ofFloatColor(0.5, 0.3, 1.0, 0.7), -0.5);
   
   foregroundFbo.allocate(ofGetWidth()*2.0, ofGetHeight()*2.0, GL_RGBA);
   foregroundFbo.begin();

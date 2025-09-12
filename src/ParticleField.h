@@ -13,7 +13,7 @@ namespace ofxParticleField {
 
 class ParticleField {
 public:
-  void setup(int approxNumParticles, ofFloatColor particleColor); // we calculate actual numParticles as a rectangular number
+  void setup(int approxNumParticles, ofFloatColor particleColor, float fieldValueOffset); // we calculate actual numParticles as a rectangular number
   void update();
   void draw(ofFbo& foregroundFbo);
   void setFieldTexture(const ofFloatPixels& pixels);
@@ -41,7 +41,7 @@ private:
   
   void allocateFieldTexture(int width, int height);
   ofTexture fieldTexture;
-  
+  float fieldValueOffset; // -0.5 when values are [0,v]; 0.0 when values are [-v,v]
 };
 
 
