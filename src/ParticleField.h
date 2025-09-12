@@ -5,6 +5,7 @@
 #include "PingPongFbo.h"
 #include "DrawShader.h"
 #include "UpdateShader.h"
+#include "ofxGui.h"
 
 namespace ofxParticleField {
 
@@ -12,11 +13,19 @@ namespace ofxParticleField {
 
 class ParticleField {
 public:
-  void setup(int approxNumParticles, ofFloatColor particleColor, glm::vec2 fieldSize); // we calculate actual numParticles as a square number
-  void update(const ofFbo& foregroundFbo);
+  void setup(int approxNumParticles, ofFloatColor particleColor); // we calculate actual numParticles as a rectangular number
+  void update();
   void draw(ofFbo& foregroundFbo);
   void setFieldTexture(const ofFloatPixels& pixels);
   
+  std::string getParameterGroupName() const { return "Particle Field"; }
+  ofParameterGroup parameters;
+  ofParameter<float> velocityDampingParameter { "velocityDamping", 0.997, 0.99, 1.0 };
+  ofParameter<float> forceMultiplierParameter { "forceMultiplier", 0.01, 0.0, 1.0 };
+  ofParameter<float> maxVelocityParameter { "maxVelocity", 0.001, 0.0, 0.01 };
+  ofParameter<float> particleSizeParameter { "particleSize", 2.0, 1.0, 50.0 };
+  ofParameterGroup& getParameterGroup();
+
 private:
   size_t numDataBuffers = 2; // position and velocity
   PingPongFbo particleDataFbo;
@@ -30,6 +39,7 @@ private:
   DrawShader drawShader;
   UpdateShader updateShader;
   
+  void allocateFieldTexture(int width, int height);
   ofTexture fieldTexture;
   
 };

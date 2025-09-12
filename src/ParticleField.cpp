@@ -9,7 +9,7 @@ namespace ofxParticleField {
 
 
 
-void ParticleField::setup(int approxNumParticles, ofFloatColor particleColor, glm::vec2 fieldSize) {
+void ParticleField::setup(int approxNumParticles, ofFloatColor particleColor) {
   size_t particleDataW = (size_t)std::sqrt((float)approxNumParticles);
   size_t particleDataH = approxNumParticles / particleDataW;
   
@@ -28,9 +28,6 @@ void ParticleField::setup(int approxNumParticles, ofFloatColor particleColor, gl
   
   drawShader.load();
   updateShader.load();
-  
-  fieldTexture.allocate(fieldSize.x, fieldSize.y, GL_RG16F, false, GL_RG, GL_FLOAT); // params are important to get a sampler2D in the shader
-  fieldTexture.setTextureWrap(GL_REPEAT, GL_REPEAT); // probably not ideal for a non-tiling field, but better than default
 }
 
 ofFboSettings ParticleField::createParticleDataFboSettings(size_t width, size_t height) const {
@@ -91,16 +88,35 @@ void ParticleField::loadParticleData(size_t dataIndex, const float* data) {
   particleDataFbo.getSource().getTexture(dataIndex).loadData(data, width, height, GL_RGB);
 }
 
+void ParticleField::allocateFieldTexture(int width, int height) {
+  fieldTexture.allocate(width, height, GL_RG16F, false, GL_RG, GL_FLOAT); // params are important to get a sampler2D in the shader
+  fieldTexture.setTextureWrap(GL_REPEAT, GL_REPEAT); // probably not ideal for a non-tiling field, but better than default
+}
+
 void ParticleField::setFieldTexture(const ofFloatPixels& pixels) {
+  if (!fieldTexture.isAllocated() || fieldTexture.getWidth() != pixels.getWidth() || fieldTexture.getHeight() != pixels.getHeight()) {
+    allocateFieldTexture(pixels.getWidth(), pixels.getHeight());
+  }
   fieldTexture.loadData(pixels);
 }
 
-void ParticleField::update(const ofFbo& foregroundFbo) {
-  updateShader.render(particleDataFbo, fieldTexture);
+void ParticleField::update() {
+  updateShader.render(particleDataFbo, fieldTexture, velocityDampingParameter, forceMultiplierParameter, maxVelocityParameter);
 }
 
 void ParticleField::draw(ofFbo& foregroundFbo) {
-  drawShader.render(mesh, foregroundFbo, particleDataFbo);
+  drawShader.render(mesh, foregroundFbo, particleDataFbo, particleSizeParameter);
+}
+
+ofParameterGroup& ParticleField::getParameterGroup() {
+  if (parameters.size() == 0) {
+    parameters.setName(getParameterGroupName());
+    parameters.add(velocityDampingParameter);
+    parameters.add(forceMultiplierParameter);
+    parameters.add(maxVelocityParameter);
+    parameters.add(particleSizeParameter);
+  }
+  return parameters;
 }
 
 

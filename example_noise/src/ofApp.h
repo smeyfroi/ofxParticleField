@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxParticleField.h"
+#include "ofxGui.h"
 
 class ofApp: public ofBaseApp {
 public:
@@ -26,4 +27,6 @@ private:
   ofTexture fieldTexture;
   int numParticles;
   ofxParticleField::ParticleField particleField;
+  
+  ofxPanel gui;
 };

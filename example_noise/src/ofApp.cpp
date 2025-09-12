@@ -21,18 +21,20 @@ void ofApp::setup(){
   ofSetFrameRate(30);
   glEnable(GL_PROGRAM_POINT_SIZE);
   
-  particleField.setup(500'000, ofFloatColor(0.5, 0.3, 1.0, 0.7), {fieldWidth, fieldHeight});
+  particleField.setup(500'000, ofFloatColor(0.5, 0.3, 1.0, 0.7));
   
   foregroundFbo.allocate(ofGetWidth()*2.0, ofGetHeight()*2.0, GL_RGBA);
   foregroundFbo.begin();
   ofClear(0, 0, 0, 255);
   foregroundFbo.end();
+  
+  gui.setup(particleField.getParameterGroup());
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
   particleField.setFieldTexture(makePerlin2DNoise(fieldWidth, fieldHeight, 0.01, ofGetElapsedTimef() * 0.1));
-  particleField.update(foregroundFbo);
+  particleField.update();
 }
 
 //--------------------------------------------------------------
@@ -44,7 +46,9 @@ void ofApp::draw(){
   foregroundFbo.draw(0.0, 0.0, ofGetWindowWidth(), ofGetWindowHeight());
 
   ofSetColor(255);
-  ofDrawBitmapString(ofToString(ofGetFrameRate()) + " FPS", 15, 15);
+  ofDrawBitmapString(ofToString(ofGetFrameRate()) + " FPS", 400, 15);
+  
+  gui.draw();
 }
 
 //--------------------------------------------------------------

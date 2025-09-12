@@ -17,14 +17,16 @@ namespace ofxParticleField {
 class UpdateShader : public Shader {
   
 public:
-  void render(PingPongFbo& particleData, ofTexture& fieldTexture) {
+  void render(PingPongFbo& particleData, ofTexture& fieldTexture, float velocityDamping, float forceMultiplier, float maxVelocity) {
     particleData.getTarget().begin();
     particleData.getTarget().activateAllDrawBuffers();
     shader.begin();
     shader.setUniformTexture("positionData", particleData.getSource().getTexture(POSITION_DATA_INDEX), 0);
     shader.setUniformTexture("velocityData", particleData.getSource().getTexture(VELOCITY_DATA_INDEX), 1);
     shader.setUniformTexture("fieldTexture", fieldTexture, 2); // FIXME: put `2` into Constants?
-    shader.setUniform1f("maxVelocity", 0.001f);
+    shader.setUniform1f("velocityDamping", velocityDamping);
+    shader.setUniform1f("forceMultiplier", forceMultiplier);
+    shader.setUniform1f("maxVelocity", maxVelocity);
     particleData.getSource().draw(0, 0);
     shader.end();
     particleData.getTarget().end();
@@ -52,6 +54,8 @@ protected:
                 uniform sampler2DRect positionData;
                 uniform sampler2DRect velocityData;
                 uniform sampler2D fieldTexture;
+                uniform float velocityDamping;
+                uniform float forceMultiplier;
                 uniform float maxVelocity;
                 layout(location = 0) out vec4 outPosition;
                 layout(location = 1) out vec4 outVelocity;
@@ -61,8 +65,6 @@ protected:
                   vec2 velocity = texture(velocityData, texCoordVarying).xy;
                   vec2 field = texture(fieldTexture, normalizedParticlePosition).xy;
 
-                  float velocityDamping = 0.999;
-                  float forceMultiplier = 0.01;
                   velocity = velocity + (field - 0.5) * forceMultiplier;
                   velocity *= velocityDamping;
                   

@@ -17,7 +17,7 @@ namespace ofxParticleField {
 class DrawShader : public Shader {
   
 public:
-  void render(const ofVboMesh& mesh, const ofFbo& fbo, PingPongFbo& particleData, float pointSize = 2.0f) {
+  void render(const ofVboMesh& mesh, const ofFbo& fbo, PingPongFbo& particleData, float pointSize) {
     fbo.begin();
     ofClear(0, 0, 0, 0);
     shader.begin();
@@ -64,7 +64,16 @@ protected:
                 out vec4 fragColor;
                 
                 void main(void) {
+                  // discard pixels outside circle
+                  vec2 cxy = 2.0 * gl_PointCoord - 1.0;
+                  float r = dot(cxy, cxy);
+                  if (r > 1.0) {
+                    discard;
+                  }
+                  // set alpha according to distance to center
+                  float alpha = 1.0 - r;
                   fragColor = colorVarying;
+                  fragColor.a *= alpha;
                 }
                 );
   }
