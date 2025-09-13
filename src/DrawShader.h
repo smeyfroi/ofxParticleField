@@ -19,7 +19,7 @@ class DrawShader : public Shader {
 public:
   void render(const ofVboMesh& mesh, const ofFbo& fbo, PingPongFbo& particleData, float pointSize) {
     fbo.begin();
-    ofClear(0, 0, 0, 0);
+    ofClear(0, 0);
     shader.begin();
     shader.setUniformTexture("positionData", particleData.getSource().getTexture(POSITION_DATA_INDEX), 0);
     shader.setUniformTexture("velocityData", particleData.getSource().getTexture(VELOCITY_DATA_INDEX), 1);
