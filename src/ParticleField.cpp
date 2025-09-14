@@ -4,6 +4,7 @@
 #include "ofLog.h"
 #include "ofApp.h"
 #include "Constants.h"
+#include "FboCopy.hpp"
 
 namespace ofxParticleField {
 
@@ -89,24 +90,28 @@ void ParticleField::loadParticleData(size_t dataIndex, const float* data) {
   particleDataFbo.getSource().getTexture(dataIndex).loadData(data, width, height, GL_RGB);
 }
 
-void ParticleField::allocateFieldTexture(int width, int height) {
-  fieldTexture.allocate(width, height, GL_RG16F, false, GL_RG, GL_FLOAT); // params are important to get a sampler2D in the shader
-  fieldTexture.setTextureWrap(GL_REPEAT, GL_REPEAT); // probably not ideal for a non-tiling field, but better than default
-}
-
-void ParticleField::setFieldTexture(const ofFloatPixels& pixels) {
-  if (!fieldTexture.isAllocated() || fieldTexture.getWidth() != pixels.getWidth() || fieldTexture.getHeight() != pixels.getHeight()) {
-    allocateFieldTexture(pixels.getWidth(), pixels.getHeight());
-  }
-  fieldTexture.loadData(pixels);
+void ParticleField::setField(const ofFbo& newFieldFbo) {
+//  ofxMarkSynth::fboCopyBlit(newFieldFbo, fieldFbo);
+//  ofxMarkSynth::fboCopyDraw(newFieldFbo, fieldFbo);
+  fieldFbo = newFieldFbo; // shares GPU texture with the owner
 }
 
 void ParticleField::update() {
-  updateShader.render(particleDataFbo, fieldTexture, velocityDampingParameter, forceMultiplierParameter, maxVelocityParameter, fieldValueOffset);
+  if (fieldFbo.isAllocated()) {
+    updateShader.render(particleDataFbo, fieldFbo.getTexture(), velocityDampingParameter, forceMultiplierParameter, maxVelocityParameter, fieldValueOffset);
+  }
 }
 
 void ParticleField::draw(ofFbo& foregroundFbo) {
   drawShader.render(mesh, foregroundFbo, particleDataFbo, particleSizeParameter);
+
+//  foregroundFbo.begin();
+//  ofPushStyle();
+//  ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+//  ofSetColor(ofFloatColor { 1.0, 1.0, 1.0, 0.5 });
+//  fieldFbo.draw(0.0, 0.0, foregroundFbo.getWidth(), foregroundFbo.getHeight());
+//  ofPopStyle();
+//  foregroundFbo.end();
 }
 
 ofParameterGroup& ParticleField::getParameterGroup() {
@@ -122,4 +127,4 @@ ofParameterGroup& ParticleField::getParameterGroup() {
 
 
 
-}
+} // namespace ofxParticleField

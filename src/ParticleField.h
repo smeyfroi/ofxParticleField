@@ -10,13 +10,14 @@
 namespace ofxParticleField {
 
 
-
+// Accepts a field as Pixels, which are loaded into the fieldTexture,
+// or an ofFbo reference, whose texture is copied into fieldFbo.
 class ParticleField {
 public:
   void setup(int approxNumParticles, ofFloatColor particleColor, float fieldValueOffset); // we calculate actual numParticles as a rectangular number
   void update();
   void draw(ofFbo& foregroundFbo);
-  void setFieldTexture(const ofFloatPixels& pixels);
+  void setField(const ofFbo& fieldFbo);
   
   std::string getParameterGroupName() const { return "Particle Field"; }
   ofParameterGroup parameters;
@@ -39,9 +40,9 @@ private:
   DrawShader drawShader;
   UpdateShader updateShader;
   
-  void allocateFieldTexture(int width, int height);
-  ofTexture fieldTexture;
   float fieldValueOffset; // -0.5 when values are [0,v]; 0.0 when values are [-v,v]
+  
+  ofFbo fieldFbo; // alternative to fieldTexture
 };
 
 
