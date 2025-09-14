@@ -67,6 +67,10 @@ protected:
                   vec2 velocity = texture(velocityData, texCoordVarying).xy;
                   vec2 field = texture(fieldTexture, normalizedParticlePosition).xy;
 
+                  // FIXME: where are these NaNs coming from with the VideoFlowSourceMod?
+                  if (isnan(field.x)) field.x = 0.0;
+                  if (isnan(field.y)) field.y = 0.0;
+                  
                   velocity = velocity + (field + fieldValueOffset) * forceMultiplier;
                   velocity *= velocityDamping;
                   
