@@ -24,7 +24,7 @@ private:
   ofFbo foregroundFbo;
   int fieldWidth = 200;
   int fieldHeight = 200;
-  ofTexture fieldTexture;
+  ofFbo fieldFbo;
   int numParticles;
   ofxParticleField::ParticleField particleField;
   

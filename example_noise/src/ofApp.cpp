@@ -21,19 +21,31 @@ void ofApp::setup(){
   ofSetFrameRate(30);
   glEnable(GL_PROGRAM_POINT_SIZE);
   
-  particleField.setup(500'000, ofFloatColor(0.5, 0.3, 1.0, 0.7), -0.5);
+  particleField.setup(2'000'000, ofFloatColor(0.5, 0.3, 1.0, 0.7), -0.5);
   
   foregroundFbo.allocate(ofGetWidth()*2.0, ofGetHeight()*2.0, GL_RGBA);
   foregroundFbo.begin();
   ofClear(0, 0, 0, 255);
   foregroundFbo.end();
   
+  ofFbo::Settings s;
+  s.width = fieldWidth;
+  s.height = fieldHeight;
+  s.internalformat = GL_RG16F;
+  s.useDepth = false;
+  s.useStencil = false;
+  s.numColorbuffers = 1;
+  s.textureTarget = GL_TEXTURE_2D;
+  fieldFbo.allocate(s);
+
   gui.setup(particleField.getParameterGroup());
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-  particleField.setFieldTexture(makePerlin2DNoise(fieldWidth, fieldHeight, 0.01, ofGetElapsedTimef() * 0.1));
+  ofFloatPixels pixels = makePerlin2DNoise(fieldWidth, fieldHeight, 0.01, ofGetElapsedTimef()*0.1);
+  fieldFbo.getTexture().loadData(pixels);
+  particleField.setField(fieldFbo);
   particleField.update();
 }
 

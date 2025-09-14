@@ -4,7 +4,6 @@
 #include "ofLog.h"
 #include "ofApp.h"
 #include "Constants.h"
-#include "FboCopy.hpp"
 
 namespace ofxParticleField {
 
