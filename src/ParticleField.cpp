@@ -97,7 +97,7 @@ void ParticleField::setField(const ofFbo& newFieldFbo) {
 
 void ParticleField::update() {
   if (fieldFbo.isAllocated()) {
-    updateShader.render(particleDataFbo, fieldFbo.getTexture(), velocityDampingParameter, forceMultiplierParameter, maxVelocityParameter, fieldValueOffset);
+    updateShader.render(particleDataFbo, fieldFbo.getTexture(), velocityDampingParameter, forceMultiplierParameter, maxVelocityParameter, fieldValueOffset, jitterStrengthParameter);
   }
 }
 
@@ -120,6 +120,7 @@ ofParameterGroup& ParticleField::getParameterGroup() {
     parameters.add(forceMultiplierParameter);
     parameters.add(maxVelocityParameter);
     parameters.add(particleSizeParameter);
+    parameters.add(jitterStrengthParameter);
   }
   return parameters;
 }

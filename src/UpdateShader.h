@@ -17,7 +17,7 @@ namespace ofxParticleField {
 class UpdateShader : public Shader {
   
 public:
-  void render(PingPongFbo& particleData, ofTexture& fieldTexture, float velocityDamping, float forceMultiplier, float maxVelocity, float fieldValueOffset) {
+  void render(PingPongFbo& particleData, ofTexture& fieldTexture, float velocityDamping, float forceMultiplier, float maxVelocity, float fieldValueOffset, float jitterStrength) {
     particleData.getTarget().begin();
     particleData.getTarget().activateAllDrawBuffers();
     shader.begin();
@@ -28,7 +28,7 @@ public:
     shader.setUniform1f("forceMultiplier", forceMultiplier);
     shader.setUniform1f("maxVelocity", maxVelocity);
     shader.setUniform1f("fieldValueOffset", fieldValueOffset);
-    shader.setUniform1f("jitterStrength", 0.01f);
+    shader.setUniform1f("jitterStrength", jitterStrength);
     shader.setUniform1f("jitterSeed", ofGetElapsedTimef());
     particleData.getSource().draw(0, 0);
     shader.end();
