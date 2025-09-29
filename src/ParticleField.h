@@ -25,7 +25,8 @@ public:
   ofParameter<float> forceMultiplierParameter { "forceMultiplier", 0.01, 0.0, 1.0 };
   ofParameter<float> maxVelocityParameter { "maxVelocity", 0.001, 0.0, 0.01 };
   ofParameter<float> particleSizeParameter { "particleSize", 2.0, 1.0, 50.0 };
-  ofParameter<float> jitterStrengthParameter { "jitterStrength", 0.1, 0.0, 2.0 };
+  ofParameter<float> jitterStrengthParameter { "jitterStrength", 0.2, 0.0, 2.0 };
+  ofParameter<float> speedThresholdParameter { "speedThreshold", 2.0, 0.1, 10.0 };
   ofParameterGroup& getParameterGroup();
 
 private:

@@ -102,7 +102,7 @@ void ParticleField::update() {
 }
 
 void ParticleField::draw(ofFbo& foregroundFbo) {
-  drawShader.render(mesh, foregroundFbo, particleDataFbo, particleSizeParameter);
+  drawShader.render(mesh, foregroundFbo, particleDataFbo, particleSizeParameter, speedThresholdParameter);
 
 //  foregroundFbo.begin();
 //  ofPushStyle();
@@ -121,6 +121,7 @@ ofParameterGroup& ParticleField::getParameterGroup() {
     parameters.add(maxVelocityParameter);
     parameters.add(particleSizeParameter);
     parameters.add(jitterStrengthParameter);
+    parameters.add(speedThresholdParameter);
   }
   return parameters;
 }
