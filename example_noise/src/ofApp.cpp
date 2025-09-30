@@ -17,35 +17,35 @@ static ofFloatPixels makePerlin2DNoise(int w, int h, float scale, float z) {
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+  ofEnableAlphaBlending();
+  ofDisableArbTex();
+
   ofBackground(0);
   ofSetFrameRate(30);
   glEnable(GL_PROGRAM_POINT_SIZE);
   
-  particleField.setup(2'000'000, ofFloatColor(0.5, 0.3, 1.0, 0.7), -0.5);
+  particleField.setup(1'000'000, ofFloatColor(0.5, 0.3, 1.0, 0.7), -0.5, -0.5);
   
   foregroundFbo.allocate(ofGetWidth()*2.0, ofGetHeight()*2.0, GL_RGBA);
   foregroundFbo.begin();
   ofClear(0, 0, 0, 255);
   foregroundFbo.end();
-  
-  ofFbo::Settings s;
-  s.width = fieldWidth;
-  s.height = fieldHeight;
-  s.internalformat = GL_RG16F;
-  s.useDepth = false;
-  s.useStencil = false;
-  s.numColorbuffers = 1;
-  s.textureTarget = GL_TEXTURE_2D;
-  fieldFbo.allocate(s);
+
+  field1Texture.allocate(fieldWidth, fieldHeight, GL_RG16F);
+  field2Texture.allocate(fieldWidth, fieldHeight, GL_RG16F);
 
   gui.setup(particleField.getParameterGroup());
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-  ofFloatPixels pixels = makePerlin2DNoise(fieldWidth, fieldHeight, 0.01, ofGetElapsedTimef()*0.1);
-  fieldFbo.getTexture().loadData(pixels);
-  particleField.setField(fieldFbo);
+  ofFloatPixels pixels1 = makePerlin2DNoise(fieldWidth, fieldHeight, 0.001, ofGetElapsedTimef()*0.1);
+  field1Texture.loadData(pixels1);
+  ofFloatPixels pixels2 = makePerlin2DNoise(fieldWidth, fieldHeight, 0.01, -1000.0 + ofGetElapsedTimef()*0.2);
+  field2Texture.loadData(pixels2);
+
+  particleField.setField1(field1Texture);
+  particleField.setField2(field2Texture);
   particleField.update();
 }
 

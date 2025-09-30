@@ -14,10 +14,12 @@ namespace ofxParticleField {
 // or an ofFbo reference, whose texture is copied into fieldFbo.
 class ParticleField {
 public:
-  void setup(int approxNumParticles, ofFloatColor particleColor, float fieldValueOffset); // we calculate actual numParticles as a rectangular number
+  ParticleField();
+  void setup(int approxNumParticles, ofFloatColor particleColor, float field1ValueOffset, float field2ValueOffset); // we calculate actual numParticles as a rectangular number
   void update();
   void draw(ofFbo& foregroundFbo);
-  void setField(const ofFbo& fieldFbo);
+  void setField1(const ofTexture& fieldTexture);
+  void setField2(const ofTexture& fieldTexture);
   
   std::string getParameterGroupName() const { return "Particle Field"; }
   ofParameterGroup parameters;
@@ -28,7 +30,7 @@ public:
   ofParameter<float> jitterStrengthParameter { "jitterStrength", 0.2, 0.0, 2.0 };
   ofParameter<float> speedThresholdParameter { "speedThreshold", 2.0, 0.1, 10.0 };
   ofParameterGroup& getParameterGroup();
-
+  
 private:
   size_t numDataBuffers = 2; // position and velocity
   PingPongFbo particleDataFbo;
@@ -41,10 +43,11 @@ private:
   
   DrawShader drawShader;
   UpdateShader updateShader;
-  
-  float fieldValueOffset; // -0.5 when values are [0,v]; 0.0 when values are [-v,v]
-  
-  ofFbo fieldFbo; // alternative to fieldTexture
+    
+  float field1ValueOffset, field2ValueOffset; // -0.5 when values are [0,v]; 0.0 when values are [-v,v]
+  ofTexture field1Texture, field2Texture;
+  ofTexture emptyFieldTexture;
+
 };
 
 

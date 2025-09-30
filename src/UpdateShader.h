@@ -17,17 +17,19 @@ namespace ofxParticleField {
 class UpdateShader : public Shader {
   
 public:
-  void render(PingPongFbo& particleData, ofTexture& fieldTexture, float velocityDamping, float forceMultiplier, float maxVelocity, float fieldValueOffset, float jitterStrength) {
+  void render(PingPongFbo& particleData, const ofTexture& field1Texture, const ofTexture& field2Texture, float field1ValueOffset, float field2ValueOffset, float velocityDamping, float forceMultiplier, float maxVelocity, float jitterStrength) {
     particleData.getTarget().begin();
     particleData.getTarget().activateAllDrawBuffers();
     shader.begin();
     shader.setUniformTexture("positionData", particleData.getSource().getTexture(POSITION_DATA_INDEX), 0);
     shader.setUniformTexture("velocityData", particleData.getSource().getTexture(VELOCITY_DATA_INDEX), 1);
-    shader.setUniformTexture("fieldTexture", fieldTexture, 2); // FIXME: put `2` into Constants?
+    shader.setUniformTexture("field1Texture", field1Texture, 2);
+    shader.setUniformTexture("field2Texture", field2Texture, 3);
+    shader.setUniform1f("field1ValueOffset", field1ValueOffset);
+    shader.setUniform1f("field2ValueOffset", field2ValueOffset);
     shader.setUniform1f("velocityDamping", velocityDamping);
     shader.setUniform1f("forceMultiplier", forceMultiplier);
     shader.setUniform1f("maxVelocity", maxVelocity);
-    shader.setUniform1f("fieldValueOffset", fieldValueOffset);
     shader.setUniform1f("jitterStrength", jitterStrength);
     shader.setUniform1f("jitterSeed", ofGetElapsedTimef());
     particleData.getSource().draw(0, 0);
@@ -56,11 +58,13 @@ protected:
                 in vec2 texCoordVarying;
                 uniform sampler2DRect positionData;
                 uniform sampler2DRect velocityData;
-                uniform sampler2D fieldTexture;
+                uniform sampler2D field1Texture;
+                uniform sampler2D field2Texture;
+                uniform float field1ValueOffset;
+                uniform float field2ValueOffset;
                 uniform float velocityDamping;
                 uniform float forceMultiplier;
                 uniform float maxVelocity;
-                uniform float fieldValueOffset;
                 uniform float jitterStrength; // e.g. 0.001..0.01
                 uniform float jitterSeed;     // vary per frame (time or frame index)
                 layout(location = 0) out vec4 outPosition;
@@ -74,7 +78,9 @@ protected:
                 void main(void) {
                   vec2 normalizedParticlePosition = texture(positionData, texCoordVarying).xy;
                   vec2 velocity = texture(velocityData, texCoordVarying).xy;
-                  vec2 field = texture(fieldTexture, normalizedParticlePosition).xy;
+                  vec2 field1 = texture(field1Texture, normalizedParticlePosition).xy + field1ValueOffset;
+                  vec2 field2 = texture(field2Texture, normalizedParticlePosition).xy + field2ValueOffset;
+                  vec2 field = field1 + field2;
 
                   // FIXME: where are these NaNs coming from with the VideoFlowSourceMod?
                   if (isnan(field.x)) field.x = 0.0;
@@ -87,7 +93,7 @@ protected:
                   );
                   vec2 jitter = (rnd - 0.5) * (2.0 * jitterStrength);
 
-                  velocity += (field + fieldValueOffset) * forceMultiplier;
+                  velocity += field * forceMultiplier;
                   velocity += jitter;
                   velocity *= velocityDamping;
                   

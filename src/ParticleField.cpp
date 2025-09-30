@@ -9,8 +9,19 @@ namespace ofxParticleField {
 
 
 
-void ParticleField::setup(int approxNumParticles, ofFloatColor particleColor, float fieldValueOffset_) {
-  fieldValueOffset = fieldValueOffset_;
+ParticleField::ParticleField() {
+  ofPixels emptyFieldPixels;
+  emptyFieldPixels.allocate(1, 1, OF_PIXELS_RG);
+  emptyFieldPixels.setColor(ofColor::black);
+  
+  ofDisableArbTex();
+  emptyFieldTexture.allocate(emptyFieldPixels);
+  emptyFieldTexture.loadData(emptyFieldPixels);
+}
+
+void ParticleField::setup(int approxNumParticles, ofFloatColor particleColor, float field1ValueOffset_, float field2ValueOffset_) {
+  field1ValueOffset = field1ValueOffset_;
+  field2ValueOffset = field2ValueOffset_;
   size_t particleDataW = (size_t)std::sqrt((float)approxNumParticles);
   size_t particleDataH = approxNumParticles / particleDataW;
   
@@ -89,15 +100,29 @@ void ParticleField::loadParticleData(size_t dataIndex, const float* data) {
   particleDataFbo.getSource().getTexture(dataIndex).loadData(data, width, height, GL_RGB);
 }
 
-void ParticleField::setField(const ofFbo& newFieldFbo) {
-//  ofxMarkSynth::fboCopyBlit(newFieldFbo, fieldFbo);
-//  ofxMarkSynth::fboCopyDraw(newFieldFbo, fieldFbo);
-  fieldFbo = newFieldFbo; // shares GPU texture with the owner
+void ParticleField::setField1(const ofTexture& fieldTexture) {
+  field1Texture = fieldTexture; // shares GPU texture with the owner
+}
+
+void ParticleField::setField2(const ofTexture& fieldTexture) {
+  field2Texture = fieldTexture; // shares GPU texture with the owner
 }
 
 void ParticleField::update() {
-  if (fieldFbo.isAllocated()) {
-    updateShader.render(particleDataFbo, fieldFbo.getTexture(), velocityDampingParameter, forceMultiplierParameter, maxVelocityParameter, fieldValueOffset, jitterStrengthParameter);
+  if (field2Texture.isAllocated() && field1Texture.isAllocated()) {
+    updateShader.render(particleDataFbo,
+                        field1Texture, field2Texture,
+                        field1ValueOffset, field2ValueOffset,
+                        velocityDampingParameter, forceMultiplierParameter,
+                        maxVelocityParameter, jitterStrengthParameter);
+  } else if (field1Texture.isAllocated()) {
+    updateShader.render(particleDataFbo,
+                        field1Texture, emptyFieldTexture,
+                        field1ValueOffset, field2ValueOffset,
+                        velocityDampingParameter, forceMultiplierParameter,
+                        maxVelocityParameter, jitterStrengthParameter);
+  } else {
+    ofLogError() << "ofxParticleField::update: no field texture set";
   }
 }
 
@@ -108,7 +133,8 @@ void ParticleField::draw(ofFbo& foregroundFbo) {
 //  ofPushStyle();
 //  ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 //  ofSetColor(ofFloatColor { 1.0, 1.0, 1.0, 0.5 });
-//  fieldFbo.draw(0.0, 0.0, foregroundFbo.getWidth(), foregroundFbo.getHeight());
+//  field1Texture.draw(0.0, 0.0, foregroundFbo.getWidth(), foregroundFbo.getHeight());
+//  field2Texture.draw(0.0, 0.0, foregroundFbo.getWidth(), foregroundFbo.getHeight());
 //  ofPopStyle();
 //  foregroundFbo.end();
 }

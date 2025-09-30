@@ -22,9 +22,11 @@ public:
 
 private:
   ofFbo foregroundFbo;
+  
   int fieldWidth = 200;
   int fieldHeight = 200;
-  ofFbo fieldFbo;
+  ofTexture field1Texture, field2Texture;
+  
   int numParticles;
   ofxParticleField::ParticleField particleField;
   
