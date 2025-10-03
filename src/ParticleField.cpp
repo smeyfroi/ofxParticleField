@@ -121,8 +121,6 @@ void ParticleField::update() {
                         field1ValueOffset, field2ValueOffset,
                         velocityDampingParameter, forceMultiplierParameter,
                         maxVelocityParameter, jitterStrengthParameter);
-  } else {
-    ofLogError() << "ofxParticleField::update: no field texture set";
   }
 }
 
