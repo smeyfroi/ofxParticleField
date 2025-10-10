@@ -139,13 +139,13 @@ void ParticleField::update() {
                         field1Texture, field2Texture,
                         field1ValueOffset, field2ValueOffset,
                         velocityDampingParameter, forceMultiplierParameter,
-                        maxVelocityParameter, jitterStrengthParameter);
+                        maxVelocityParameter, jitterStrengthParameter, jitterSmoothingParameter);
   } else if (field1Texture.isAllocated()) {
     updateShader.render(particleDataFbo,
                         field1Texture, emptyFieldTexture,
                         field1ValueOffset, field2ValueOffset,
                         velocityDampingParameter, forceMultiplierParameter,
-                        maxVelocityParameter, jitterStrengthParameter);
+                        maxVelocityParameter, jitterStrengthParameter, jitterSmoothingParameter);
   }
 }
 
@@ -161,6 +161,7 @@ ofParameterGroup& ParticleField::getParameterGroup() {
     parameters.add(maxVelocityParameter);
     parameters.add(particleSizeParameter);
     parameters.add(jitterStrengthParameter);
+    parameters.add(jitterSmoothingParameter);
     parameters.add(speedThresholdParameter);
   }
   return parameters;

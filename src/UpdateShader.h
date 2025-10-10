@@ -17,7 +17,7 @@ namespace ofxParticleField {
 class UpdateShader : public Shader {
   
 public:
-  void render(PingPongFbo& particleData, const ofTexture& field1Texture, const ofTexture& field2Texture, float field1ValueOffset, float field2ValueOffset, float velocityDamping, float forceMultiplier, float maxVelocity, float jitterStrength) {
+  void render(PingPongFbo& particleData, const ofTexture& field1Texture, const ofTexture& field2Texture, float field1ValueOffset, float field2ValueOffset, float velocityDamping, float forceMultiplier, float maxVelocity, float jitterStrength, float jitterSmoothing) {
     particleData.getTarget().begin();
     particleData.getTarget().activateAllDrawBuffers();
     shader.begin();
@@ -32,6 +32,7 @@ public:
     shader.setUniform1f("forceMultiplier", forceMultiplier);
     shader.setUniform1f("maxVelocity", maxVelocity);
     shader.setUniform1f("jitterStrength", jitterStrength);
+    shader.setUniform1f("jitterSmoothing", jitterSmoothing);
     shader.setUniform1f("jitterSeed", ofGetElapsedTimef());
     particleData.getSource().draw(0, 0);
     shader.end();
@@ -68,6 +69,7 @@ protected:
                 uniform float forceMultiplier;
                 uniform float maxVelocity;
                 uniform float jitterStrength;
+                uniform float jitterSmoothing;
                 uniform float jitterSeed;
                 layout(location = 0) out vec4 outPosition;
                 layout(location = 1) out vec4 outVelocity;
@@ -96,7 +98,6 @@ protected:
                   );
                   vec2 jitterRaw = (rnd - 0.5) * (2.0 * jitterStrength);
                   
-                  float jitterSmoothing = 0.1;
                   jitterSmooth = mix(jitterSmooth, jitterRaw, jitterSmoothing);
 
                   velocity += field * forceMultiplier;
