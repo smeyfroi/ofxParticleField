@@ -2,8 +2,6 @@
 #include <cmath>
 #include "ofRandomEngine.h"
 #include "ofLog.h"
-#include "ofApp.h"
-#include "Constants.h"
 
 namespace ofxParticleField {
 
@@ -13,21 +11,29 @@ ParticleField::ParticleField() {
   ofPixels emptyFieldPixels;
   emptyFieldPixels.allocate(1, 1, OF_PIXELS_RG);
   emptyFieldPixels.setColor(ofColor::black);
-  
   ofDisableArbTex();
   emptyFieldTexture.allocate(emptyFieldPixels);
   emptyFieldTexture.loadData(emptyFieldPixels);
 }
 
-void ParticleField::setup(int approxNumParticles, ofFloatColor particleColor, float field1ValueOffset_, float field2ValueOffset_) {
+void ParticleField::setup(int approxNumParticles, ofFloatColor particleColor_, float field1ValueOffset_, float field2ValueOffset_) {
+  particleColor = particleColor_;
   field1ValueOffset = field1ValueOffset_;
   field2ValueOffset = field2ValueOffset_;
   size_t particleDataW = (size_t)std::sqrt((float)approxNumParticles);
   size_t particleDataH = approxNumParticles / particleDataW;
   
   particleDataFbo.allocate(createParticleDataFboSettings(particleDataW, particleDataH));
-  setupParticlePositions();
-  setupParticleVelocities();
+  
+  drawShader.load();
+  updateShader.load();
+  initShader.load();
+  
+  particleDataFbo.getSource().begin();
+  for (size_t i = 0; i < numDataBuffers; ++i) {
+    initShader.initializeRegion(particleDataFbo.getTarget(), i, 0, 0, particleDataW, particleDataH, ofRandom(10000.0f, 99999.0f) + i * 123.45f);
+  }
+  particleDataFbo.getSource().end();
   
   mesh.setMode(OF_PRIMITIVE_POINTS);
   for (size_t x = 0; x < particleDataW; ++x) {
@@ -37,9 +43,70 @@ void ParticleField::setup(int approxNumParticles, ofFloatColor particleColor, fl
       mesh.addColor(particleColor);
     }
   }
+}
+
+void ParticleField::resizeParticles(int newApproxNumParticles) {
+  size_t oldWidth = particleDataFbo.getWidth();
+  size_t oldHeight = particleDataFbo.getHeight();
+  size_t oldCount = oldWidth * oldHeight;
   
-  drawShader.load();
-  updateShader.load();
+  size_t newWidth = (size_t)std::sqrt((float)newApproxNumParticles);
+  size_t newHeight = newApproxNumParticles / newWidth;
+  size_t newCount = newWidth * newHeight;
+  
+  if (oldWidth == newWidth && oldHeight == newHeight) {
+    return;
+  }
+  
+  ofFbo tempFbo;
+  tempFbo.allocate(createParticleDataFboSettings(oldWidth, oldHeight));
+  
+  tempFbo.begin();
+  for (size_t i = 0; i < numDataBuffers; ++i) {
+    glDrawBuffer(GL_COLOR_ATTACHMENT0 + i);
+    ofSetColor(255);
+    particleDataFbo.getSource().getTexture(i).draw(0, 0);
+  }
+  tempFbo.end();
+  
+  particleDataFbo.allocate(createParticleDataFboSettings(newWidth, newHeight));
+  
+  size_t minWidth = (oldWidth < newWidth) ? oldWidth : newWidth;
+  size_t minHeight = (oldHeight < newHeight) ? oldHeight : newHeight;
+  
+  particleDataFbo.getSource().begin();
+  for (size_t i = 0; i < numDataBuffers; ++i) {
+    glDrawBuffer(GL_COLOR_ATTACHMENT0 + i);
+    glClearColor(0, 0, 0, 0);
+    glClear(GL_COLOR_BUFFER_BIT);
+    ofSetColor(255);
+    tempFbo.getTexture(i).draw(0, 0, minWidth, minHeight);
+  }
+  
+  if (newCount > oldCount) {
+    size_t initMinHeight = (oldHeight < newHeight) ? oldHeight : newHeight;
+    if (newWidth > oldWidth) {
+      for (size_t i = 0; i < numDataBuffers; ++i) {
+        initShader.initializeRegion(particleDataFbo.getTarget(), i, oldWidth, 0, newWidth - oldWidth, initMinHeight, ofRandom(10000.0f, 99999.0f) + i * 123.45f);
+      }
+    }
+    if (newHeight > oldHeight) {
+      for (size_t i = 0; i < numDataBuffers; ++i) {
+        initShader.initializeRegion(particleDataFbo.getTarget(), i, 0, oldHeight, newWidth, newHeight - oldHeight, ofRandom(10000.0f, 99999.0f) + i * 123.45f);
+      }
+    }
+  }
+  particleDataFbo.getSource().end();
+  
+  mesh.clear();
+  mesh.setMode(OF_PRIMITIVE_POINTS);
+  for (size_t x = 0; x < newWidth; ++x) {
+    for (size_t y = 0; y < newHeight; ++y) {
+      mesh.addVertex({ (float)x, (float)y, 0.0f });
+      mesh.addTexCoord({ (float)x, (float)y });
+      mesh.addColor(particleColor);
+    }
+  }
 }
 
 ofFboSettings ParticleField::createParticleDataFboSettings(size_t width, size_t height) const {
@@ -56,49 +123,7 @@ ofFboSettings ParticleField::createParticleDataFboSettings(size_t width, size_t 
   return fboSettings;
 }
 
-void ParticleField::setupParticlePositions() {
-  size_t width = particleDataFbo.getWidth();
-  size_t height = particleDataFbo.getHeight();
-  float* particlePositions = new float[width * height * 2];
-  for (unsigned y = 0; y < height; ++y)
-  {
-    for (unsigned x = 0; x < width; ++x)
-    {
-      unsigned idx = y * width + x;
-      particlePositions[idx * 2 + 0] = ofRandom(1.0) + 0.0;
-      particlePositions[idx * 2 + 1] = ofRandom(1.0) + 0.0;
-    }
-  }
-  loadParticleData(POSITION_DATA_INDEX, particlePositions);
-  delete[] particlePositions;
-}
 
-void ParticleField::setupParticleVelocities() {
-  size_t width = particleDataFbo.getWidth();
-  size_t height = particleDataFbo.getHeight();
-  float* particleVelocities = new float[width * height * 2];
-  for (unsigned y = 0; y < height; ++y)
-  {
-    for (unsigned x = 0; x < width; ++x)
-    {
-      unsigned idx = y * width + x;
-      particleVelocities[idx * 2 + 0] = ofRandom(-0.2, 0.2);
-      particleVelocities[idx * 2 + 1] = ofRandom(-0.2, 0.2);
-    }
-  }
-  loadParticleData(VELOCITY_DATA_INDEX, particleVelocities);
-  delete[] particleVelocities;
-}
-
-void ParticleField::loadParticleData(size_t dataIndex, const float* data) {
-  if (dataIndex > numDataBuffers) {
-    ofLogError() << "ofxParticleField::loadParticleData: invalid data index " << dataIndex;
-    return;
-  }
-  size_t width = particleDataFbo.getWidth();
-  size_t height = particleDataFbo.getHeight();
-  particleDataFbo.getSource().getTexture(dataIndex).loadData(data, width, height, GL_RGB);
-}
 
 void ParticleField::setField1(const ofTexture& fieldTexture) {
   field1Texture = fieldTexture; // shares GPU texture with the owner
@@ -126,15 +151,6 @@ void ParticleField::update() {
 
 void ParticleField::draw(ofFbo& foregroundFbo) {
   drawShader.render(mesh, foregroundFbo, particleDataFbo, particleSizeParameter, speedThresholdParameter);
-
-//  foregroundFbo.begin();
-//  ofPushStyle();
-//  ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-//  ofSetColor(ofFloatColor { 1.0, 1.0, 1.0, 0.5 });
-//  field1Texture.draw(0.0, 0.0, foregroundFbo.getWidth(), foregroundFbo.getHeight());
-//  field2Texture.draw(0.0, 0.0, foregroundFbo.getWidth(), foregroundFbo.getHeight());
-//  ofPopStyle();
-//  foregroundFbo.end();
 }
 
 ofParameterGroup& ParticleField::getParameterGroup() {

@@ -5,6 +5,7 @@
 #include "PingPongFbo.h"
 #include "DrawShader.h"
 #include "UpdateShader.h"
+#include "InitShader.h"
 #include "ofxGui.h"
 
 namespace ofxParticleField {
@@ -15,11 +16,14 @@ namespace ofxParticleField {
 class ParticleField {
 public:
   ParticleField();
-  void setup(int approxNumParticles, ofFloatColor particleColor, float field1ValueOffset, float field2ValueOffset); // we calculate actual numParticles as a rectangular number
+  void setup(int approxNumParticles, ofFloatColor particleColor, float field1ValueOffset, float field2ValueOffset);
+  void resizeParticles(int newApproxNumParticles);
   void update();
   void draw(ofFbo& foregroundFbo);
   void setField1(const ofTexture& fieldTexture);
   void setField2(const ofTexture& fieldTexture);
+  
+  int getParticleCount() const { return particleDataFbo.getWidth() * particleDataFbo.getHeight(); }
   
   std::string getParameterGroupName() const { return "Particle Field"; }
   ofParameterGroup parameters;
@@ -35,14 +39,13 @@ private:
   size_t numDataBuffers = 2; // position and velocity
   PingPongFbo particleDataFbo;
   ofFboSettings createParticleDataFboSettings(size_t width, size_t height) const;
-  void setupParticlePositions();
-  void setupParticleVelocities();
-  void loadParticleData(size_t dataIndex, const float* data);
   
   ofVboMesh mesh;
+  ofFloatColor particleColor;
   
   DrawShader drawShader;
   UpdateShader updateShader;
+  InitShader initShader;
     
   float field1ValueOffset, field2ValueOffset; // -0.5 when values are [0,v]; 0.0 when values are [-v,v]
   ofTexture field1Texture, field2Texture;

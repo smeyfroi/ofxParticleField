@@ -51,6 +51,10 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+  foregroundFbo.begin();
+  ofClear(0, 0);
+  foregroundFbo.end();
+  ofEnableBlendMode(OF_BLENDMODE_ADD);
   particleField.draw(foregroundFbo);
 
   ofSetColor(255);
@@ -65,7 +69,17 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+  if (key == '+' || key == '=') {
+    int currentCount = particleField.getParticleCount();
+    int newCount = currentCount * 1.5;
+    particleField.resizeParticles(newCount);
+    ofLogNotice() << "Resized particles to " << particleField.getParticleCount();
+  } else if (key == '-' || key == '_') {
+    int currentCount = particleField.getParticleCount();
+    int newCount = currentCount * 0.66;
+    particleField.resizeParticles(newCount);
+    ofLogNotice() << "Resized particles to " << particleField.getParticleCount();
+  }
 }
 
 //--------------------------------------------------------------
@@ -91,6 +105,17 @@ void ofApp::mousePressed(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
 
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseScrolled(int x, int y, float scrollX, float scrollY){
+  int currentCount = particleField.getParticleCount();
+  int newCount = currentCount + (scrollY * 10000);
+  if (newCount < 10000) newCount = 10000;
+  if (newCount != currentCount) {
+    particleField.resizeParticles(newCount);
+    ofLogNotice() << "Resized particles to " << particleField.getParticleCount();
+  }
 }
 
 //--------------------------------------------------------------
