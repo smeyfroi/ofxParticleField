@@ -12,5 +12,6 @@ namespace ofxParticleField {
 
 static const size_t POSITION_DATA_INDEX = 0;
 static const size_t VELOCITY_DATA_INDEX = 1;
+static const size_t JITTER_DATA_INDEX = 2;
 
 }

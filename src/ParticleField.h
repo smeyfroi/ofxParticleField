@@ -36,7 +36,7 @@ public:
   ofParameterGroup& getParameterGroup();
   
 private:
-  size_t numDataBuffers = 2; // position and velocity
+  size_t numDataBuffers = 3; // position, velocity, jitter
   PingPongFbo particleDataFbo;
   ofFboSettings createParticleDataFboSettings(size_t width, size_t height) const;
   
