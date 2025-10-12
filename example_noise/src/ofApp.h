@@ -28,7 +28,6 @@ private:
   int fieldHeight = 200;
   ofTexture field1Texture, field2Texture;
   
-  int numParticles;
   ofxParticleField::ParticleField particleField;
   
   ofxPanel gui;

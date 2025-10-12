@@ -134,6 +134,11 @@ void ParticleField::setField2(const ofTexture& fieldTexture) {
 }
 
 void ParticleField::update() {
+  if (pendingResize && (ofGetElapsedTimef() - lastResizeTime) >= resizeDebounceDelay) {
+    resizeParticles(pendingParticleCount);
+    pendingResize = false;
+  }
+  
   if (field2Texture.isAllocated() && field1Texture.isAllocated()) {
     updateShader.render(particleDataFbo,
                         field1Texture, field2Texture,
@@ -153,9 +158,16 @@ void ParticleField::draw(ofFbo& foregroundFbo) {
   drawShader.render(mesh, foregroundFbo, particleDataFbo, particleSizeParameter, speedThresholdParameter);
 }
 
+void ParticleField::onLn2ParticleCountChanged(float& value) {
+  pendingParticleCount = (int)std::pow(2.0f, value);
+  pendingResize = true;
+  lastResizeTime = ofGetElapsedTimef();
+}
+
 ofParameterGroup& ParticleField::getParameterGroup() {
   if (parameters.size() == 0) {
     parameters.setName(getParameterGroupName());
+    parameters.add(ln2ParticleCountParameter);
     parameters.add(velocityDampingParameter);
     parameters.add(forceMultiplierParameter);
     parameters.add(maxVelocityParameter);
@@ -163,6 +175,7 @@ ofParameterGroup& ParticleField::getParameterGroup() {
     parameters.add(jitterStrengthParameter);
     parameters.add(jitterSmoothingParameter);
     parameters.add(speedThresholdParameter);
+    ln2ParticleCountParameter.addListener(this, &ParticleField::onLn2ParticleCountChanged);
   }
   return parameters;
 }

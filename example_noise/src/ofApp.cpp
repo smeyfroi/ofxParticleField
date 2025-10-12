@@ -24,7 +24,9 @@ void ofApp::setup(){
   ofSetFrameRate(30);
   glEnable(GL_PROGRAM_POINT_SIZE);
   
-  particleField.setup(1'000'000, ofFloatColor(0.5, 0.3, 1.0, 0.7), -0.5, -0.5);
+  int initialParticleCount = 1'000'000;
+  particleField.setup(initialParticleCount, ofFloatColor(0.5, 0.3, 1.0, 0.7), -0.5, -0.5);
+  particleField.ln2ParticleCountParameter = std::log2((float)initialParticleCount);
   
   foregroundFbo.allocate(ofGetWidth()*2.0, ofGetHeight()*2.0, GL_RGBA);
   foregroundFbo.begin();
@@ -69,17 +71,7 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-  if (key == '+' || key == '=') {
-    int currentCount = particleField.getParticleCount();
-    int newCount = currentCount * 1.5;
-    particleField.resizeParticles(newCount);
-    ofLogNotice() << "Resized particles to " << particleField.getParticleCount();
-  } else if (key == '-' || key == '_') {
-    int currentCount = particleField.getParticleCount();
-    int newCount = currentCount * 0.66;
-    particleField.resizeParticles(newCount);
-    ofLogNotice() << "Resized particles to " << particleField.getParticleCount();
-  }
+
 }
 
 //--------------------------------------------------------------
@@ -109,13 +101,7 @@ void ofApp::mouseReleased(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mouseScrolled(int x, int y, float scrollX, float scrollY){
-  int currentCount = particleField.getParticleCount();
-  int newCount = currentCount + (scrollY * 10000);
-  if (newCount < 10000) newCount = 10000;
-  if (newCount != currentCount) {
-    particleField.resizeParticles(newCount);
-    ofLogNotice() << "Resized particles to " << particleField.getParticleCount();
-  }
+
 }
 
 //--------------------------------------------------------------
