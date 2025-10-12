@@ -16,7 +16,7 @@ namespace ofxParticleField {
 class ParticleField {
 public:
   ParticleField();
-  void setup(int approxNumParticles, ofFloatColor particleColor, float field1ValueOffset, float field2ValueOffset);
+  void setup(ofFloatColor particleColor, float field1ValueOffset, float field2ValueOffset);
   void resizeParticles(int newApproxNumParticles);
   void update();
   void draw(ofFbo& foregroundFbo);
@@ -27,11 +27,11 @@ public:
   
   std::string getParameterGroupName() const { return "Particle Field"; }
   ofParameterGroup parameters;
-  ofParameter<float> ln2ParticleCountParameter { "ln2ParticleCount", 10.0, 10.0, 22.0 };
+  ofParameter<float> ln2ParticleCountParameter { "ln2ParticleCount", 14.0, 10.0, 22.0 };
   ofParameter<float> velocityDampingParameter { "velocityDamping", 0.997, 0.99, 1.0 };
   ofParameter<float> forceMultiplierParameter { "forceMultiplier", 0.01, 0.0, 1.0 };
   ofParameter<float> maxVelocityParameter { "maxVelocity", 0.001, 0.0, 0.01 };
-  ofParameter<float> particleSizeParameter { "particleSize", 4.0, 1.0, 50.0 };
+  ofParameter<float> particleSizeParameter { "particleSize", 8.0, 1.0, 50.0 };
   ofParameter<float> jitterStrengthParameter { "jitterStrength", 0.2, 0.0, 2.0 };
   ofParameter<float> jitterSmoothingParameter { "jitterSmoothing", 0.1, 0.0, 1.0 };
   ofParameter<float> speedThresholdParameter { "speedThreshold", 2.0, 0.1, 10.0 };

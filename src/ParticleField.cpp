@@ -16,74 +16,77 @@ ParticleField::ParticleField() {
   emptyFieldTexture.loadData(emptyFieldPixels);
 }
 
-void ParticleField::setup(int approxNumParticles, ofFloatColor particleColor_, float field1ValueOffset_, float field2ValueOffset_) {
+void ParticleField::setup(ofFloatColor particleColor_, float field1ValueOffset_, float field2ValueOffset_) {
   particleColor = particleColor_;
   field1ValueOffset = field1ValueOffset_;
   field2ValueOffset = field2ValueOffset_;
-  size_t particleDataW, particleDataH;
-  calculateParticleDimensions(approxNumParticles, particleDataW, particleDataH);
-  
-  particleDataFbo.allocate(createParticleDataFboSettings(particleDataW, particleDataH));
   
   drawShader.load();
   updateShader.load();
   initShader.load();
   
-  particleDataFbo.getSource().begin();
-  initializeParticleRegion(0, 0, particleDataW, particleDataH);
-  particleDataFbo.getSource().end();
-  
-  rebuildMesh(particleDataW, particleDataH);
+  int initialParticleCount = (int)std::pow(2.0f, ln2ParticleCountParameter.get());
+  resizeParticles(initialParticleCount);
 }
 
 void ParticleField::resizeParticles(int newApproxNumParticles) {
-  size_t oldWidth = particleDataFbo.getWidth();
-  size_t oldHeight = particleDataFbo.getHeight();
-  size_t oldCount = oldWidth * oldHeight;
-  
   size_t newWidth, newHeight;
   calculateParticleDimensions(newApproxNumParticles, newWidth, newHeight);
   size_t newCount = newWidth * newHeight;
   
-  if (oldWidth == newWidth && oldHeight == newHeight) {
-    return;
-  }
+  bool isInitialSetup = !particleDataFbo.isAllocated();
   
-  ofFbo tempFbo;
-  tempFbo.allocate(createParticleDataFboSettings(oldWidth, oldHeight));
-  
-  tempFbo.begin();
-  for (size_t i = 0; i < numDataBuffers; ++i) {
-    glDrawBuffer(GL_COLOR_ATTACHMENT0 + i);
-    ofSetColor(255);
-    particleDataFbo.getSource().getTexture(i).draw(0, 0);
-  }
-  tempFbo.end();
-  
-  particleDataFbo.allocate(createParticleDataFboSettings(newWidth, newHeight));
-  
-  size_t minWidth = (oldWidth < newWidth) ? oldWidth : newWidth;
-  size_t minHeight = (oldHeight < newHeight) ? oldHeight : newHeight;
-  
-  particleDataFbo.getSource().begin();
-  for (size_t i = 0; i < numDataBuffers; ++i) {
-    glDrawBuffer(GL_COLOR_ATTACHMENT0 + i);
-    glClearColor(0, 0, 0, 0);
-    glClear(GL_COLOR_BUFFER_BIT);
-    ofSetColor(255);
-    tempFbo.getTexture(i).draw(0, 0, minWidth, minHeight);
-  }
-  
-  if (newCount > oldCount) {
-    size_t initMinHeight = (oldHeight < newHeight) ? oldHeight : newHeight;
-    if (newWidth > oldWidth) {
-      initializeParticleRegion(oldWidth, 0, newWidth - oldWidth, initMinHeight);
+  if (!isInitialSetup) {
+    size_t oldWidth = particleDataFbo.getWidth();
+    size_t oldHeight = particleDataFbo.getHeight();
+    size_t oldCount = oldWidth * oldHeight;
+    
+    if (oldWidth == newWidth && oldHeight == newHeight) {
+      return;
     }
-    if (newHeight > oldHeight) {
-      initializeParticleRegion(0, oldHeight, newWidth, newHeight - oldHeight);
+    
+    ofFbo tempFbo;
+    tempFbo.allocate(createParticleDataFboSettings(oldWidth, oldHeight));
+    
+    tempFbo.begin();
+    for (size_t i = 0; i < numDataBuffers; ++i) {
+      glDrawBuffer(GL_COLOR_ATTACHMENT0 + i);
+      ofSetColor(255);
+      particleDataFbo.getSource().getTexture(i).draw(0, 0);
     }
+    tempFbo.end();
+    
+    particleDataFbo.allocate(createParticleDataFboSettings(newWidth, newHeight));
+    
+    size_t minWidth = (oldWidth < newWidth) ? oldWidth : newWidth;
+    size_t minHeight = (oldHeight < newHeight) ? oldHeight : newHeight;
+    
+    particleDataFbo.getSource().begin();
+    for (size_t i = 0; i < numDataBuffers; ++i) {
+      glDrawBuffer(GL_COLOR_ATTACHMENT0 + i);
+      glClearColor(0, 0, 0, 0);
+      glClear(GL_COLOR_BUFFER_BIT);
+      ofSetColor(255);
+      tempFbo.getTexture(i).draw(0, 0, minWidth, minHeight);
+    }
+    
+    if (newCount > oldCount) {
+      size_t initMinHeight = (oldHeight < newHeight) ? oldHeight : newHeight;
+      if (newWidth > oldWidth) {
+        initializeParticleRegion(oldWidth, 0, newWidth - oldWidth, initMinHeight);
+      }
+      if (newHeight > oldHeight) {
+        initializeParticleRegion(0, oldHeight, newWidth, newHeight - oldHeight);
+      }
+    }
+    particleDataFbo.getSource().end();
+  } else {
+    particleDataFbo.allocate(createParticleDataFboSettings(newWidth, newHeight));
+    
+    particleDataFbo.getSource().begin();
+    initializeParticleRegion(0, 0, newWidth, newHeight);
+    particleDataFbo.getSource().end();
   }
-  particleDataFbo.getSource().end();
   
   rebuildMesh(newWidth, newHeight);
 }

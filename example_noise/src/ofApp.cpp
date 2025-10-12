@@ -24,9 +24,7 @@ void ofApp::setup(){
   ofSetFrameRate(30);
   glEnable(GL_PROGRAM_POINT_SIZE);
   
-  int initialParticleCount = 1'000'000;
-  particleField.setup(initialParticleCount, ofFloatColor(0.5, 0.3, 1.0, 0.7), -0.5, -0.5);
-  particleField.ln2ParticleCountParameter = std::log2((float)initialParticleCount);
+  particleField.setup(ofFloatColor(0.5, 0.3, 1.0, 0.7), -0.5, -0.5);
   
   foregroundFbo.allocate(ofGetWidth()*2.0, ofGetHeight()*2.0, GL_RGBA);
   foregroundFbo.begin();
