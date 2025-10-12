@@ -42,6 +42,7 @@ private:
   ofFboSettings createParticleDataFboSettings(size_t width, size_t height) const;
   void rebuildMesh(size_t width, size_t height);
   void calculateParticleDimensions(int approxNumParticles, size_t& outWidth, size_t& outHeight) const;
+  void initializeParticleRegion(size_t x, size_t y, size_t width, size_t height);
   
   ofVboMesh mesh;
   ofFloatColor particleColor;

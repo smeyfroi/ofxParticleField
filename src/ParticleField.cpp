@@ -30,9 +30,7 @@ void ParticleField::setup(int approxNumParticles, ofFloatColor particleColor_, f
   initShader.load();
   
   particleDataFbo.getSource().begin();
-  for (size_t i = 0; i < numDataBuffers; ++i) {
-    initShader.initializeRegion(particleDataFbo.getTarget(), i, 0, 0, particleDataW, particleDataH, ofRandom(10000.0f, 99999.0f) + i * 123.45f);
-  }
+  initializeParticleRegion(0, 0, particleDataW, particleDataH);
   particleDataFbo.getSource().end();
   
   rebuildMesh(particleDataW, particleDataH);
@@ -79,14 +77,10 @@ void ParticleField::resizeParticles(int newApproxNumParticles) {
   if (newCount > oldCount) {
     size_t initMinHeight = (oldHeight < newHeight) ? oldHeight : newHeight;
     if (newWidth > oldWidth) {
-      for (size_t i = 0; i < numDataBuffers; ++i) {
-        initShader.initializeRegion(particleDataFbo.getTarget(), i, oldWidth, 0, newWidth - oldWidth, initMinHeight, ofRandom(10000.0f, 99999.0f) + i * 123.45f);
-      }
+      initializeParticleRegion(oldWidth, 0, newWidth - oldWidth, initMinHeight);
     }
     if (newHeight > oldHeight) {
-      for (size_t i = 0; i < numDataBuffers; ++i) {
-        initShader.initializeRegion(particleDataFbo.getTarget(), i, 0, oldHeight, newWidth, newHeight - oldHeight, ofRandom(10000.0f, 99999.0f) + i * 123.45f);
-      }
+      initializeParticleRegion(0, oldHeight, newWidth, newHeight - oldHeight);
     }
   }
   particleDataFbo.getSource().end();
@@ -97,6 +91,12 @@ void ParticleField::resizeParticles(int newApproxNumParticles) {
 void ParticleField::calculateParticleDimensions(int approxNumParticles, size_t& outWidth, size_t& outHeight) const {
   outWidth = (size_t)std::sqrt((float)approxNumParticles);
   outHeight = approxNumParticles / outWidth;
+}
+
+void ParticleField::initializeParticleRegion(size_t x, size_t y, size_t width, size_t height) {
+  for (size_t i = 0; i < numDataBuffers; ++i) {
+    initShader.initializeRegion(particleDataFbo.getTarget(), i, x, y, width, height, ofRandom(10000.0f, 99999.0f) + i * 123.45f);
+  }
 }
 
 void ParticleField::rebuildMesh(size_t width, size_t height) {
@@ -124,8 +124,6 @@ ofFboSettings ParticleField::createParticleDataFboSettings(size_t width, size_t 
   fboSettings.wrapModeVertical = GL_CLAMP_TO_EDGE;
   return fboSettings;
 }
-
-
 
 void ParticleField::setField1(const ofTexture& fieldTexture) {
   field1Texture = fieldTexture; // shares GPU texture with the owner
