@@ -20,8 +20,8 @@ void ParticleField::setup(int approxNumParticles, ofFloatColor particleColor_, f
   particleColor = particleColor_;
   field1ValueOffset = field1ValueOffset_;
   field2ValueOffset = field2ValueOffset_;
-  size_t particleDataW = (size_t)std::sqrt((float)approxNumParticles);
-  size_t particleDataH = approxNumParticles / particleDataW;
+  size_t particleDataW, particleDataH;
+  calculateParticleDimensions(approxNumParticles, particleDataW, particleDataH);
   
   particleDataFbo.allocate(createParticleDataFboSettings(particleDataW, particleDataH));
   
@@ -35,14 +35,7 @@ void ParticleField::setup(int approxNumParticles, ofFloatColor particleColor_, f
   }
   particleDataFbo.getSource().end();
   
-  mesh.setMode(OF_PRIMITIVE_POINTS);
-  for (size_t x = 0; x < particleDataW; ++x) {
-    for (size_t y = 0; y < particleDataH; ++y) {
-      mesh.addVertex({ (float)x, (float)y, 0.0f });
-      mesh.addTexCoord({ (float)x, (float)y });
-      mesh.addColor(particleColor);
-    }
-  }
+  rebuildMesh(particleDataW, particleDataH);
 }
 
 void ParticleField::resizeParticles(int newApproxNumParticles) {
@@ -50,8 +43,8 @@ void ParticleField::resizeParticles(int newApproxNumParticles) {
   size_t oldHeight = particleDataFbo.getHeight();
   size_t oldCount = oldWidth * oldHeight;
   
-  size_t newWidth = (size_t)std::sqrt((float)newApproxNumParticles);
-  size_t newHeight = newApproxNumParticles / newWidth;
+  size_t newWidth, newHeight;
+  calculateParticleDimensions(newApproxNumParticles, newWidth, newHeight);
   size_t newCount = newWidth * newHeight;
   
   if (oldWidth == newWidth && oldHeight == newHeight) {
@@ -98,10 +91,19 @@ void ParticleField::resizeParticles(int newApproxNumParticles) {
   }
   particleDataFbo.getSource().end();
   
+  rebuildMesh(newWidth, newHeight);
+}
+
+void ParticleField::calculateParticleDimensions(int approxNumParticles, size_t& outWidth, size_t& outHeight) const {
+  outWidth = (size_t)std::sqrt((float)approxNumParticles);
+  outHeight = approxNumParticles / outWidth;
+}
+
+void ParticleField::rebuildMesh(size_t width, size_t height) {
   mesh.clear();
   mesh.setMode(OF_PRIMITIVE_POINTS);
-  for (size_t x = 0; x < newWidth; ++x) {
-    for (size_t y = 0; y < newHeight; ++y) {
+  for (size_t x = 0; x < width; ++x) {
+    for (size_t y = 0; y < height; ++y) {
       mesh.addVertex({ (float)x, (float)y, 0.0f });
       mesh.addTexCoord({ (float)x, (float)y });
       mesh.addColor(particleColor);
