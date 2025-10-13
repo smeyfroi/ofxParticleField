@@ -183,6 +183,21 @@ ofParameterGroup& ParticleField::getParameterGroup() {
   return parameters;
 }
 
+void ParticleField::updateRandomColorBlocks(int numBlocks, int blockSize, std::function<ofFloatColor(size_t)> colorFunc) {
+  auto& colors = mesh.getColors();
+  size_t totalParticles = colors.size();
+  
+  for (int i = 0; i < numBlocks; i++) {
+    size_t blockStart = (size_t)(ofRandom(totalParticles / blockSize)) * blockSize;
+    
+    for (int j = 0; j < blockSize && (blockStart + j) < totalParticles; j++) {
+      colors[blockStart + j] = colorFunc(blockStart + j);
+    }
+  }
+  
+  mesh.updateVbo();
+}
+
 
 
 } // namespace ofxParticleField

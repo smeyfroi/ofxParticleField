@@ -47,6 +47,12 @@ void ofApp::update(){
   particleField.setField1(field1Texture);
   particleField.setField2(field2Texture);
   particleField.update();
+  
+  if (ofGetFrameNum() % 30 == 0) {
+    particleField.updateRandomColorBlocks(50, 16, [](size_t idx) {
+      return ofFloatColor(ofRandom(0.3, 1.0), ofRandom(0.3, 1.0), ofRandom(0.3, 1.0), 0.7);
+    });
+  }
 }
 
 //--------------------------------------------------------------
@@ -63,13 +69,26 @@ void ofApp::draw(){
 
   ofSetColor(255);
   ofDrawBitmapString(ofToString(ofGetFrameRate()) + " FPS", 400, 15);
+  ofDrawBitmapString("Press 'c' for random colors, 'r' for red blocks, 'b' for blue blocks", 10, 15);
   
   gui.draw();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+  if (key == 'c') {
+    particleField.updateRandomColorBlocks(100, 16, [](size_t idx) {
+      return ofFloatColor(ofRandom(0.3, 1.0), ofRandom(0.3, 1.0), ofRandom(0.3, 1.0), 0.7);
+    });
+  } else if (key == 'r') {
+    particleField.updateRandomColorBlocks(50, 32, [](size_t idx) {
+      return ofFloatColor(1.0, 0.0, 0.0, 0.7);
+    });
+  } else if (key == 'b') {
+    particleField.updateRandomColorBlocks(50, 32, [](size_t idx) {
+      return ofFloatColor(0.0, 0.3, 1.0, 0.7);
+    });
+  }
 }
 
 //--------------------------------------------------------------

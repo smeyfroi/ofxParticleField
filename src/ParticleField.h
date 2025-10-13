@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include "ofTexture.h"
 #include "ofVboMesh.h"
 #include "PingPongFbo.h"
@@ -22,6 +23,7 @@ public:
   void draw(ofFbo& foregroundFbo);
   void setField1(const ofTexture& fieldTexture);
   void setField2(const ofTexture& fieldTexture);
+  void updateRandomColorBlocks(int numBlocks, int blockSize, std::function<ofFloatColor(size_t)> colorFunc);
   
   int getParticleCount() const { return particleDataFbo.getWidth() * particleDataFbo.getHeight(); }
   
