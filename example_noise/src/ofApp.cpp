@@ -60,7 +60,7 @@ void ofApp::draw(){
   foregroundFbo.begin();
   ofClear(0, 0);
   foregroundFbo.end();
-  ofEnableBlendMode(OF_BLENDMODE_ADD);
+  ofEnableBlendMode(OF_BLENDMODE_SCREEN);
   particleField.draw(foregroundFbo);
 
   ofSetColor(255);
