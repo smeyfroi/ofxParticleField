@@ -157,8 +157,9 @@ void ParticleField::update() {
   }
 }
 
-void ParticleField::draw(ofFbo& foregroundFbo) {
-  drawShader.render(mesh, foregroundFbo, particleDataFbo, particleSizeParameter, speedThresholdParameter);
+void ParticleField::draw(ofFbo& foregroundFbo, bool smallParticles) {
+  float particleSize = smallParticles ? smallParticleSize() : particleSizeParameter.get();
+  drawShader.render(mesh, foregroundFbo, particleDataFbo, particleSize, speedThresholdParameter);
 }
 
 void ParticleField::onLn2ParticleCountChanged(float& value) {

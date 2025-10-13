@@ -20,7 +20,8 @@ public:
   void setup(ofFloatColor particleColor, float field1ValueOffset, float field2ValueOffset);
   void resizeParticles(int newApproxNumParticles);
   void update();
-  void draw(ofFbo& foregroundFbo);
+  float smallParticleSize() const { return std::min(particleSizeParameter / 8.0f, 1.0f); }
+  void draw(ofFbo& foregroundFbo, bool smallParticles = false); // smallParticles uses smallParticleSize
   void setField1(const ofTexture& fieldTexture);
   void setField2(const ofTexture& fieldTexture);
   void updateRandomColorBlocks(int numBlocks, int blockSize, std::function<ofFloatColor(size_t)> colorFunc);
