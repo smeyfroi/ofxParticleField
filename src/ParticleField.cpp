@@ -151,7 +151,7 @@ void ParticleField::update() {
   } else if (field1Texture.isAllocated()) {
     updateShader.render(particleDataFbo,
                         field1Texture, emptyFieldTexture,
-                        field1ValueOffset, field2ValueOffset,
+                        field1ValueOffset, 0.0f,
                         velocityDampingParameter, forceMultiplierParameter,
                         maxVelocityParameter, jitterStrengthParameter, jitterSmoothingParameter);
   }
