@@ -7,7 +7,7 @@ namespace ofxParticleField {
 class InitShader : public Shader {
   
 public:
-  void initializeRegion(ofFbo& targetFbo, size_t dataIndex, size_t startX, size_t startY, size_t width, size_t height, float randomSeed) {
+  void initializeRegion(ofFbo& targetFbo, size_t dataIndex, size_t startX, size_t startY, size_t width, size_t height, float randomSeed, float minWeight = 0.5f, float maxWeight = 2.0f) {
     glDrawBuffer(GL_COLOR_ATTACHMENT0 + dataIndex);
     
     ofPushView();
@@ -27,6 +27,8 @@ public:
     shader.setUniform2f("fboSize", (float)targetFbo.getWidth(), (float)targetFbo.getHeight());
     shader.setUniform2f("regionStart", (float)startX, (float)startY);
     shader.setUniform1f("randomSeed", randomSeed);
+    shader.setUniform1f("minWeight", minWeight);
+    shader.setUniform1f("maxWeight", maxWeight);
     ofDrawRectangle(startX, startY, width, height);
     shader.end();
     ofPopStyle();
@@ -56,6 +58,8 @@ protected:
                 uniform vec2 fboSize;
                 uniform vec2 regionStart;
                 uniform float randomSeed;
+                uniform float minWeight;
+                uniform float maxWeight;
                 out vec4 fragColor;
                 
                 uint hash(uint x) {
@@ -100,6 +104,9 @@ protected:
                   } else if (dataIndex == 1) {
                     vec2 velocity = (random2(pixelCoord, randomSeed + 123.456) - 0.5) * 0.4;
                     fragColor = vec4(velocity, 0.0, 1.0);
+                  } else if (dataIndex == 3) {
+                    float weight = mix(minWeight, maxWeight, random(pixelCoord, randomSeed + 789.123));
+                    fragColor = vec4(weight, 0.0, 0.0, 1.0);
                   } else {
                     fragColor = vec4(0.0, 0.0, 0.0, 1.0);
                   }

@@ -98,7 +98,7 @@ void ParticleField::calculateParticleDimensions(int approxNumParticles, size_t& 
 
 void ParticleField::initializeParticleRegion(size_t x, size_t y, size_t width, size_t height) {
   for (size_t i = 0; i < numDataBuffers; ++i) {
-    initShader.initializeRegion(particleDataFbo.getTarget(), i, x, y, width, height, ofRandom(10000.0f, 99999.0f) + i * 123.45f);
+    initShader.initializeRegion(particleDataFbo.getTarget(), i, x, y, width, height, ofRandom(10000.0f, 99999.0f) + i * 123.45f, minWeightParameter, maxWeightParameter);
   }
 }
 
@@ -179,6 +179,8 @@ ofParameterGroup& ParticleField::getParameterGroup() {
     parameters.add(jitterStrengthParameter);
     parameters.add(jitterSmoothingParameter);
     parameters.add(speedThresholdParameter);
+    parameters.add(minWeightParameter);
+    parameters.add(maxWeightParameter);
     ln2ParticleCountParameter.addListener(this, &ParticleField::onLn2ParticleCountChanged);
   }
   return parameters;

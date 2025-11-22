@@ -24,6 +24,7 @@ public:
     shader.setUniformTexture("positionData", particleData.getSource().getTexture(POSITION_DATA_INDEX), 0);
     shader.setUniformTexture("velocityData", particleData.getSource().getTexture(VELOCITY_DATA_INDEX), 1);
     shader.setUniformTexture("jitterData", particleData.getSource().getTexture(JITTER_DATA_INDEX), 2);
+    shader.setUniformTexture("weightData", particleData.getSource().getTexture(WEIGHT_DATA_INDEX), 5);
     shader.setUniformTexture("field1Texture", field1Texture, 3);
     shader.setUniformTexture("field2Texture", field2Texture, 4);
     shader.setUniform1f("field1ValueOffset", field1ValueOffset);
@@ -61,6 +62,7 @@ protected:
                 uniform sampler2DRect positionData;
                 uniform sampler2DRect velocityData;
                 uniform sampler2DRect jitterData;
+                uniform sampler2DRect weightData;
                 uniform sampler2D field1Texture;
                 uniform sampler2D field2Texture;
                 uniform float field1ValueOffset;
@@ -74,6 +76,7 @@ protected:
                 layout(location = 0) out vec4 outPosition;
                 layout(location = 1) out vec4 outVelocity;
                 layout(location = 2) out vec4 outJitter;
+                layout(location = 3) out vec4 outWeight;
                 
                 // Cheap per-pixel RNG (Interleaved Gradient Noise)
                 float ign(vec2 p) {
@@ -84,6 +87,7 @@ protected:
                   vec2 normalizedParticlePosition = texture(positionData, texCoordVarying).xy;
                   vec2 velocity = texture(velocityData, texCoordVarying).xy;
                   vec2 jitterSmooth = texture(jitterData, texCoordVarying).xy;
+                  float weight = texture(weightData, texCoordVarying).x;
                   vec2 field1 = texture(field1Texture, normalizedParticlePosition).xy + field1ValueOffset;
                   vec2 field2 = texture(field2Texture, normalizedParticlePosition).xy + field2ValueOffset;
                   vec2 field = field1 + field2;
@@ -100,13 +104,17 @@ protected:
                   
                   jitterSmooth = mix(jitterSmooth, jitterRaw, jitterSmoothing);
 
-                  velocity += field * forceMultiplier;
+                  // Apply force divided by weight (F/m = a)
+                  // Heavier particles (weight > 1) accelerate less, lighter particles (weight < 1) accelerate more
+                  velocity += (field * forceMultiplier) / weight;
                   velocity += jitterSmooth;
+                  // velocity += jitterSmooth / weight; // Optional: also scale jitter by weight
                   velocity *= velocityDamping;
                   
                   outPosition = vec4(fract(normalizedParticlePosition + velocity*maxVelocity), 0.0, 1.0);
                   outVelocity = vec4(velocity, 0.0, 1.0);
                   outJitter = vec4(jitterSmooth, 0.0, 1.0);
+                  outWeight = vec4(weight, 0.0, 0.0, 1.0);
                 }
                 );
   }

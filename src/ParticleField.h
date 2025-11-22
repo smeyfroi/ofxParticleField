@@ -20,7 +20,7 @@ public:
   void setup(ofFloatColor particleColor, float field1ValueOffset, float field2ValueOffset);
   void resizeParticles(int newApproxNumParticles);
   void update();
-  float smallParticleSize() const { return std::min(particleSizeParameter / 8.0f, 1.0f); }
+  float smallParticleSize() const { return std::min(particleSizeParameter / 12.0f, 1.0f); }
   void draw(ofFbo& foregroundFbo, bool smallParticles = false); // smallParticles uses smallParticleSize
   void setField1(const ofTexture& fieldTexture);
   void setField2(const ofTexture& fieldTexture);
@@ -38,10 +38,12 @@ public:
   ofParameter<float> jitterStrengthParameter { "jitterStrength", 0.2, 0.0, 2.0 };
   ofParameter<float> jitterSmoothingParameter { "jitterSmoothing", 0.1, 0.0, 1.0 };
   ofParameter<float> speedThresholdParameter { "speedThreshold", 2.0, 0.1, 10.0 };
+  ofParameter<float> minWeightParameter { "minWeight", 0.5, 0.1, 2.0 };
+  ofParameter<float> maxWeightParameter { "maxWeight", 2.0, 0.5, 5.0 };
   ofParameterGroup& getParameterGroup();
   
 private:
-  size_t numDataBuffers = 3; // position, velocity, jitter
+  size_t numDataBuffers = 4; // position, velocity, jitter, weight
   PingPongFbo particleDataFbo;
   ofFboSettings createParticleDataFboSettings(size_t width, size_t height) const;
   void rebuildMesh(size_t width, size_t height);
