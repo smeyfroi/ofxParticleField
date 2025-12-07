@@ -26,7 +26,7 @@ void ofApp::setup(){
   
   particleField.setup(ofFloatColor(0.5, 0.3, 1.0, 0.7), -0.5, -0.5);
   
-  foregroundFbo.allocate(ofGetWidth()*2.0, ofGetHeight()*2.0, GL_RGBA);
+  foregroundFbo.allocate(ofGetWidth()*8.0, ofGetHeight()*8.0, GL_RGBA);
   foregroundFbo.begin();
   ofClear(0, 0, 0, 255);
   foregroundFbo.end();

@@ -37,6 +37,7 @@ public:
     shader.setUniform1f("jitterSeed", ofGetElapsedTimef());
     particleData.getSource().draw(0, 0);
     shader.end();
+    glDrawBuffer(GL_COLOR_ATTACHMENT0); // Reset to single draw buffer after MRT
     particleData.getTarget().end();
     particleData.swap();
   }

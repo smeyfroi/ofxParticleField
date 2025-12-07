@@ -33,6 +33,7 @@ public:
     shader.end();
     ofPopStyle();
     
+    glDrawBuffer(GL_COLOR_ATTACHMENT0); // Reset to default attachment
     ofPopView();
   }
   

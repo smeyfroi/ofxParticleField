@@ -54,6 +54,7 @@ void ParticleField::resizeParticles(int newApproxNumParticles) {
       ofSetColor(255);
       particleDataFbo.getSource().getTexture(i).draw(0, 0);
     }
+    glDrawBuffer(GL_COLOR_ATTACHMENT0); // Reset to default attachment
     tempFbo.end();
     
     particleDataFbo.allocate(createParticleDataFboSettings(newWidth, newHeight));
@@ -69,6 +70,7 @@ void ParticleField::resizeParticles(int newApproxNumParticles) {
       ofSetColor(255);
       tempFbo.getTexture(i).draw(0, 0, minWidth, minHeight);
     }
+    glDrawBuffer(GL_COLOR_ATTACHMENT0); // Reset to default attachment
     
     if (newCount > oldCount) {
       size_t initMinHeight = (oldHeight < newHeight) ? oldHeight : newHeight;
