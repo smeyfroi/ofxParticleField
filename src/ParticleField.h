@@ -32,14 +32,14 @@ public:
   ofParameterGroup parameters;
   ofParameter<float> ln2ParticleCountParameter { "ln2ParticleCount", 14.0, 10.0, 22.0 };
   ofParameter<float> velocityDampingParameter { "velocityDamping", 0.997, 0.99, 1.0 };
-  ofParameter<float> forceMultiplierParameter { "forceMultiplier", 0.01, 0.0, 1.0 };
+  ofParameter<float> forceMultiplierParameter { "forceMultiplier", 1.0, 0.0, 5.0 };
   ofParameter<float> maxVelocityParameter { "maxVelocity", 0.001, 0.0, 0.01 };
   ofParameter<float> particleSizeParameter { "particleSize", 8.0, 1.0, 50.0 };
   ofParameter<float> jitterStrengthParameter { "jitterStrength", 0.2, 0.0, 2.0 };
   ofParameter<float> jitterSmoothingParameter { "jitterSmoothing", 0.1, 0.0, 1.0 };
   ofParameter<float> speedThresholdParameter { "speedThreshold", 2.0, 0.1, 10.0 };
-  ofParameter<float> minWeightParameter { "minWeight", 0.5, 0.1, 2.0 };
-  ofParameter<float> maxWeightParameter { "maxWeight", 2.0, 0.5, 10.0 };
+  ofParameter<float> minWeightParameter { "minWeight", 10.0, 1.0, 50.0 };
+  ofParameter<float> maxWeightParameter { "maxWeight", 50.0, 1.0, 100.0 };
   ofParameterGroup& getParameterGroup();
   
 private:
