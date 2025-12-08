@@ -19,6 +19,7 @@ class DrawShader : public Shader {
 public:
   void render(const ofVboMesh& mesh, const ofFbo& fbo, PingPongFbo& particleData, float pointSize, float speedThreshold) {
     ofPushStyle();
+    glEnable(GL_PROGRAM_POINT_SIZE);
     fbo.begin();
     shader.begin();
     shader.setUniformTexture("positionData", particleData.getSource().getTexture(POSITION_DATA_INDEX), 0);
@@ -30,6 +31,7 @@ public:
     mesh.draw();
     shader.end();
     fbo.end();
+    glDisable(GL_PROGRAM_POINT_SIZE);
     ofPopStyle();
   }
   
