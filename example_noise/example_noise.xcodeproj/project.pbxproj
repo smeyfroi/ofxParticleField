@@ -4,39 +4,128 @@
 	"classes": {},
 	"objectVersion": "54",
 	"objects": {
-		"00C74163-6EC8-4B50-AC19-1BC5B6E8AF38": {
+		"043B1F75-0618-4692-87F9-DA49D30EA9EC": {
 			"fileEncoding": "4",
 			"isa": "PBXFileReference",
 			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "ofxBaseGui.h",
+			"name": "ofxGui.h",
 			"sourceTree": "<group>"
 		},
-		"06D5788F-A7BC-42B5-9B0F-8756E0C2C4E3": {
+		"064B589A-8607-41FC-814F-2176911FC9A4": {
 			"fileEncoding": "4",
 			"isa": "PBXFileReference",
 			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "ThresholdedAddShader.h",
+			"name": "GaussianYBlurShader.h",
 			"sourceTree": "<group>"
 		},
-		"07888CC6-7634-4B33-A3F4-96DDB15471B5": {
+		"06637CF8-5DD4-4767-905E-75B4E494E897": {
+			"children": [
+				"0BD34444-83B6-4EA8-BCB1-DF0B30B8467A",
+				"45776D1D-D718-4B30-B5B1-08B9FF2BC405",
+				"5075269C-BEFA-4E6A-8C3D-CFEB7A38D168",
+				"B40FABDD-A778-49FE-AB20-4C3934E4F9B5",
+				"DB858B2D-0224-4048-9D92-C29F255F9231",
+				"08951F89-4487-4327-8E2D-3020BF71B438",
+				"043B1F75-0618-4692-87F9-DA49D30EA9EC",
+				"AB477F97-3E9C-46D1-8DD4-1318EE678744",
+				"F62ABA9A-B62F-4D0F-AABF-348BB031CAB6",
+				"5DEC5860-19B9-4821-A207-6433D0F731A2",
+				"D1989823-786A-4C38-BF6E-2538C4D23B36",
+				"66ACC1AD-6570-4467-B829-9551053A684B",
+				"4587C377-F9A0-4D70-8CF6-31AA46A4C860",
+				"E1A4C1C0-631F-4D15-B6DD-4984C1FE0C96",
+				"BF7D90D1-A616-4E31-84B0-215BCEB2567F",
+				"8FB5D663-AE95-4DFE-A796-BB1D9B68A25F",
+				"DBF86517-47CD-44AC-8D79-3008FD88DB25",
+				"9820E273-8898-4198-8D43-E3A3E9247926",
+				"D0AB8DE0-42F1-484D-BB85-211688D3062F",
+				"E9467190-4018-474C-AE19-75A958CABE03",
+				"24DC86C5-0385-49A2-A0E7-C60F05E76427",
+				"B76CADFC-88A2-49B3-A105-231E0B66023F"
+			],
+			"isa": "PBXGroup",
+			"name": "src",
+			"path": "src",
+			"sourceTree": "<group>"
+		},
+		"076C6A99-1594-4F8B-AA69-8EC13DBABA29": {
 			"fileEncoding": "4",
 			"isa": "PBXFileReference",
 			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "JacobiShader.h",
+			"name": "FadeEffect.h",
 			"sourceTree": "<group>"
 		},
-		"0F60B00E-2D81-4BBF-B133-B61D073CBD35": {
+		"0868C1EA-9236-40E4-883C-177C225E65A7": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "AddTextureShader.h",
+			"sourceTree": "<group>"
+		},
+		"08951F89-4487-4327-8E2D-3020BF71B438": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "ofxColorPicker.h",
+			"sourceTree": "<group>"
+		},
+		"0AF50F5F-69C6-4713-88BA-3CDA730BBF5B": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "ParticleField.h",
+			"sourceTree": "<group>"
+		},
+		"0B88E456-DD05-483D-86DD-DB91C03F4E07": {
+			"children": [
+				"F2061D4C-8B61-40D4-B18B-47429510E05D",
+				"196EF0D9-194E-4392-B44C-147D80A8C351",
+				"771A2D69-0FAA-46D7-BA63-E69F02235C95",
+				"7731F530-D26D-4BBF-8158-A57EB300E291",
+				"0AF50F5F-69C6-4713-88BA-3CDA730BBF5B",
+				"13DDEC20-4DAA-48CB-B684-7311125864B0",
+				"25999610-7840-4250-B538-7EB91C5CE802"
+			],
+			"isa": "PBXGroup",
+			"name": "src",
+			"path": "src",
+			"sourceTree": "<group>"
+		},
+		"0BD34444-83B6-4EA8-BCB1-DF0B30B8467A": {
 			"fileEncoding": "4",
 			"isa": "PBXFileReference",
 			"lastKnownFileType": "sourcecode.cpp.cpp",
-			"name": "ofxToggle.cpp",
+			"name": "ofxBaseGui.cpp",
 			"sourceTree": "<group>"
 		},
-		"1135946B-FC1D-4F40-8628-8E49C741A355": {
+		"0D3DF8D7-DF4C-402C-9550-FAFF03419DD5": {
 			"fileEncoding": "4",
 			"isa": "PBXFileReference",
 			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "UnitQuadMesh.h",
+			"name": "FluidSimulation.h",
+			"sourceTree": "<group>"
+		},
+		"0EDE2F53-DA55-4BAD-A812-5B4262E1E85B": {
+			"children": [
+				"06637CF8-5DD4-4767-905E-75B4E494E897"
+			],
+			"isa": "PBXGroup",
+			"name": "ofxGui",
+			"path": "ofxGui",
+			"sourceTree": "<group>"
+		},
+		"13DDEC20-4DAA-48CB-B684-7311125864B0": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "UpdateShader.h",
+			"sourceTree": "<group>"
+		},
+		"18930A56-5BD2-439A-A2F1-39D4B9FCB850": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "VorticityRenderer.h",
 			"sourceTree": "<group>"
 		},
 		"191CD6FA2847E21E0085CBB6": {
@@ -53,6 +142,13 @@
 			"path": "../../../libs/openFrameworks",
 			"sourceTree": "SOURCE_ROOT"
 		},
+		"196EF0D9-194E-4392-B44C-147D80A8C351": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "DrawShader.h",
+			"sourceTree": "<group>"
+		},
 		"19B789C429E5AB4A0082E9B8": {
 			"alwaysOutOfDate": "1",
 			"buildActionMask": "2147483647",
@@ -67,525 +163,387 @@
 			"shellScript": "\"$OF_PATH/scripts/osx/xcode_project.sh\"\n",
 			"showEnvVarsInLog": "0"
 		},
-		"2453861D-2C33-4D07-A38E-BF2BEAD72D7D": {
-			"fileRef": "FA11EF96-0DC4-45DF-9DAC-E658C9CEDE67",
-			"isa": "PBXBuildFile"
-		},
-		"2B523E52-1BC2-49CC-A97D-A8B4BFDFCB93": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "ofxButton.h",
-			"sourceTree": "<group>"
-		},
-		"2DB35EDF-BAD6-4528-B131-EE96BE132238": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "DrawShader.h",
-			"sourceTree": "<group>"
-		},
-		"31F1E8B0-297E-4EC2-B847-631C2073E880": {
-			"children": [
-				"D834D21A-3606-4C48-BFEB-7DB236E6CD60"
-			],
-			"isa": "PBXGroup",
-			"name": "ofxRenderer",
-			"path": "ofxRenderer",
-			"sourceTree": "<group>"
-		},
-		"32C405C7-FE42-48DB-9727-5A6B7E4C2561": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "SoftCircleShader.h",
-			"sourceTree": "<group>"
-		},
-		"3A6AFBAA-C6B2-4187-A8F6-3E172989B381": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "FadeEffect.h",
-			"sourceTree": "<group>"
-		},
-		"3AE1BA35-1A58-465F-A272-CE145401917E": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "ofxParticleField.h",
-			"sourceTree": "<group>"
-		},
-		"3B079FBC-6F59-4ED5-80FA-12A98E528223": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "ofxLabel.h",
-			"sourceTree": "<group>"
-		},
-		"3D2B7EBA-4C9A-4EEB-BEEC-8263D9641207": {
-			"fileRef": "0F60B00E-2D81-4BBF-B133-B61D073CBD35",
-			"isa": "PBXBuildFile"
-		},
-		"3FA031F1-97EC-4AA7-9C29-B93C9798DF16": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "LogisticFnShader.h",
-			"sourceTree": "<group>"
-		},
-		"4084C990-FB9F-498D-9A11-81ABEFBE0D99": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "ofxGuiGroup.h",
-			"sourceTree": "<group>"
-		},
-		"419B159F-2BE1-47A2-92DA-3979042E7C75": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "AddRadialImpulseShader.h",
-			"sourceTree": "<group>"
-		},
-		"469EFA77-D970-44AF-9D13-87624975FF8A": {
-			"children": [
-				"419B159F-2BE1-47A2-92DA-3979042E7C75",
-				"74E756EB-4AB1-4C8B-A5FC-85E9D1C8BDE9",
-				"4CBDE4B0-5A10-4E0B-81B0-46DBDE672FEF",
-				"53DDDDDD-96CB-431D-9A6B-65B5406867C4",
-				"B948C2C7-FE62-4D29-8F53-4FF093629971",
-				"9A1039AB-54B3-4C3A-A856-25CC3EADA55B",
-				"07888CC6-7634-4B33-A3F4-96DDB15471B5",
-				"A4259237-340D-4FEF-9970-01CD3AC8CC2F",
-				"A0774AA3-F9CB-4FE3-AE48-E473E685A968"
-			],
-			"isa": "PBXGroup",
-			"name": "fluid",
-			"path": "fluid",
-			"sourceTree": "<group>"
-		},
-		"4A25EB16-BBFC-41B6-8E39-3DCD3DB5346D": {
-			"fileRef": "F1BD75CD-AF32-4FE3-92B5-7A0D713182D7",
-			"isa": "PBXBuildFile"
-		},
-		"4CBDE4B0-5A10-4E0B-81B0-46DBDE672FEF": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "ApplyBouyancyShader.h",
-			"sourceTree": "<group>"
-		},
-		"4F5CE42D-F07B-4E20-ABC4-2A972431A7DF": {
+		"24DC86C5-0385-49A2-A0E7-C60F05E76427": {
 			"fileEncoding": "4",
 			"isa": "PBXFileReference",
 			"lastKnownFileType": "sourcecode.cpp.cpp",
-			"name": "ofxColorPicker.cpp",
+			"name": "ofxToggle.cpp",
 			"sourceTree": "<group>"
 		},
-		"53DDDDDD-96CB-431D-9A6B-65B5406867C4": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "ApplyVorticityForceShader.h",
-			"sourceTree": "<group>"
-		},
-		"54EE7AAB-9C9A-49BC-93F0-8F9F8B5174AF": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.cpp",
-			"name": "ofxLabel.cpp",
-			"sourceTree": "<group>"
-		},
-		"5F244462-A0C4-4304-94E9-2069C5BDD15C": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.cpp",
-			"name": "ofxSliderGroup.cpp",
-			"sourceTree": "<group>"
-		},
-		"66FE2BAC-E89E-4226-A59F-5026573B37D3": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "SmearShader.h",
-			"sourceTree": "<group>"
-		},
-		"6809DFCF-B388-4A89-A81F-AEBEAFCABF34": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "UpdateShader.h",
-			"sourceTree": "<group>"
-		},
-		"69130E8A-BAC8-470E-9C69-B73B0C8A7AE2": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "GaussianYBlurShader.h",
-			"sourceTree": "<group>"
-		},
-		"69DA4074-6DEC-4161-BFA9-7F0832E82E2F": {
-			"fileRef": "CE12F58C-4CC2-4194-A5F4-20A4DEE8AF83",
-			"isa": "PBXBuildFile"
-		},
-		"6B298236-30D9-4BCA-9512-F3AA7D5FB71A": {
-			"children": [
-				"3A6AFBAA-C6B2-4187-A8F6-3E172989B381",
-				"78E560AC-73EB-494F-9AFA-44073420E6BB"
-			],
-			"isa": "PBXGroup",
-			"name": "effects",
-			"path": "effects",
-			"sourceTree": "<group>"
-		},
-		"74E756EB-4AB1-4C8B-A5FC-85E9D1C8BDE9": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "AdvectShader.h",
-			"sourceTree": "<group>"
-		},
-		"78E560AC-73EB-494F-9AFA-44073420E6BB": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "TranslateEffect.h",
-			"sourceTree": "<group>"
-		},
-		"79D61C5F-7E7B-43A5-B704-649DEC450875": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "ofxGui.h",
-			"sourceTree": "<group>"
-		},
-		"7B333807-5F57-4FAB-8946-690A841F82C5": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "ofxSlider.h",
-			"sourceTree": "<group>"
-		},
-		"805FD579-A79A-423C-A7DE-3B2345C56E57": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.cpp",
-			"name": "ofxButton.cpp",
-			"sourceTree": "<group>"
-		},
-		"825CC05C-72C0-4D6D-9497-0C8F9FADE7BA": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "ofxSliderGroup.h",
-			"sourceTree": "<group>"
-		},
-		"85C50E5A-5561-46F4-9987-FF6FA84FB99F": {
-			"fileRef": "C71A9763-94CE-4851-8A97-B2286A4FEA76",
-			"isa": "PBXBuildFile"
-		},
-		"865E1007-4B48-48FC-84A7-39B9E5AC007B": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "Shader.h",
-			"sourceTree": "<group>"
-		},
-		"8873FE36-D959-42B0-9697-E33F09C14798": {
-			"fileRef": "BDC2BE64-5634-4B79-A450-A1729CB06B11",
-			"isa": "PBXBuildFile"
-		},
-		"888E15BB-22A6-439F-B0A8-B394D2EA7D6E": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "Constants.h",
-			"sourceTree": "<group>"
-		},
-		"8CBE7EB0-FA0C-48A0-BF62-19A163C4F0E4": {
-			"fileRef": "5F244462-A0C4-4304-94E9-2069C5BDD15C",
-			"isa": "PBXBuildFile"
-		},
-		"8E111774-7BB7-424A-B9EF-5966A8204E52": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "AddTextureShader.h",
-			"sourceTree": "<group>"
-		},
-		"93DDE6E2-C427-4F16-971B-30B5DBAB84F4": {
-			"children": [
-				"E02074A2-83E5-430E-A373-5A3B1868CD01"
-			],
-			"isa": "PBXGroup",
-			"name": "ofxParticleField",
-			"path": "ofxParticleField",
-			"sourceTree": "<group>"
-		},
-		"9A1039AB-54B3-4C3A-A856-25CC3EADA55B": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "FluidSimulation.h",
-			"sourceTree": "<group>"
-		},
-		"9AE99639-E049-46B0-8A1E-437D820A6BBE": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "TonemapShader.h",
-			"sourceTree": "<group>"
-		},
-		"A0774AA3-F9CB-4FE3-AE48-E473E685A968": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "VorticityRenderer.h",
-			"sourceTree": "<group>"
-		},
-		"A1A94C43-AAE7-45BE-AF93-B0C8B63B12C9": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "MaskShader.h",
-			"sourceTree": "<group>"
-		},
-		"A4259237-340D-4FEF-9970-01CD3AC8CC2F": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "SubtractDivergenceShader.h",
-			"sourceTree": "<group>"
-		},
-		"ACE66464-76DE-4E2C-A1EE-CE68F1FA1D7F": {
-			"fileRef": "4F5CE42D-F07B-4E20-ABC4-2A972431A7DF",
-			"isa": "PBXBuildFile"
-		},
-		"ADA90AFA-9FDF-4A1D-B824-F459767BCC57": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "PingPongRenderer.h",
-			"sourceTree": "<group>"
-		},
-		"AFE52D0F-00F2-4204-AE3E-220832B796B1": {
-			"fileRef": "805FD579-A79A-423C-A7DE-3B2345C56E57",
-			"isa": "PBXBuildFile"
-		},
-		"B0A0F17F-6262-4CCD-AD73-D1BE3608B00A": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "ofxColorPicker.h",
-			"sourceTree": "<group>"
-		},
-		"B5062FA6-50C9-4B69-8112-9BAA17D7D325": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "InitShader.h",
-			"sourceTree": "<group>"
-		},
-		"B584D053-4BC4-4A73-9AFE-CB3722C3012A": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "PingPongFbo.h",
-			"sourceTree": "<group>"
-		},
-		"B60D4A2D-6DD6-4728-8B5A-DD67DFC70F26": {
-			"fileRef": "B75D74DA-9BFF-49EE-9C1A-FE323C9A9B57",
-			"isa": "PBXBuildFile"
-		},
-		"B75D74DA-9BFF-49EE-9C1A-FE323C9A9B57": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.cpp",
-			"name": "ParticleField.cpp",
-			"sourceTree": "<group>"
-		},
-		"B948C2C7-FE62-4D29-8F53-4FF093629971": {
+		"2512CE45-01B7-4E21-BC14-21E27D6DD2DB": {
 			"fileEncoding": "4",
 			"isa": "PBXFileReference",
 			"lastKnownFileType": "sourcecode.cpp.h",
 			"name": "DivergenceRenderer.h",
 			"sourceTree": "<group>"
 		},
-		"BB4B014C10F69532006C3DED": {
-			"children": [
-				"DAED3D17-C42C-43FB-A364-BA5851397F70",
-				"93DDE6E2-C427-4F16-971B-30B5DBAB84F4",
-				"31F1E8B0-297E-4EC2-B847-631C2073E880"
-			],
-			"isa": "PBXGroup",
-			"name": "addons",
-			"path": "../../../addons",
-			"sourceTree": "SOURCE_ROOT"
-		},
-		"BBC59E73-077D-45EA-9F41-7F56DECCFEBF": {
-			"children": [
-				"BDC2BE64-5634-4B79-A450-A1729CB06B11",
-				"00C74163-6EC8-4B50-AC19-1BC5B6E8AF38",
-				"805FD579-A79A-423C-A7DE-3B2345C56E57",
-				"2B523E52-1BC2-49CC-A97D-A8B4BFDFCB93",
-				"4F5CE42D-F07B-4E20-ABC4-2A972431A7DF",
-				"B0A0F17F-6262-4CCD-AD73-D1BE3608B00A",
-				"79D61C5F-7E7B-43A5-B704-649DEC450875",
-				"FA11EF96-0DC4-45DF-9DAC-E658C9CEDE67",
-				"4084C990-FB9F-498D-9A11-81ABEFBE0D99",
-				"DD90BC77-C771-423C-B9C0-1AE2FA350150",
-				"F1BD75CD-AF32-4FE3-92B5-7A0D713182D7",
-				"F40897A0-6691-40F0-B4F2-87489EA0FC55",
-				"54EE7AAB-9C9A-49BC-93F0-8F9F8B5174AF",
-				"3B079FBC-6F59-4ED5-80FA-12A98E528223",
-				"C71A9763-94CE-4851-8A97-B2286A4FEA76",
-				"DA5CBA40-03A3-4900-9CA3-705569C93E6F",
-				"CE12F58C-4CC2-4194-A5F4-20A4DEE8AF83",
-				"7B333807-5F57-4FAB-8946-690A841F82C5",
-				"5F244462-A0C4-4304-94E9-2069C5BDD15C",
-				"825CC05C-72C0-4D6D-9497-0C8F9FADE7BA",
-				"0F60B00E-2D81-4BBF-B133-B61D073CBD35",
-				"D60F3185-5BB0-4361-A5DB-38CC4AB08099"
-			],
-			"isa": "PBXGroup",
-			"name": "src",
-			"path": "src",
-			"sourceTree": "<group>"
-		},
-		"BDC2BE64-5634-4B79-A450-A1729CB06B11": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.cpp",
-			"name": "ofxBaseGui.cpp",
-			"sourceTree": "<group>"
-		},
-		"BE049A2C-AD78-4C34-9F5F-5C90B2B25E3C": {
+		"25999610-7840-4250-B538-7EB91C5CE802": {
 			"fileEncoding": "4",
 			"isa": "PBXFileReference",
 			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "Renderer.h",
+			"name": "ofxParticleField.h",
 			"sourceTree": "<group>"
 		},
-		"C71A9763-94CE-4851-8A97-B2286A4FEA76": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.cpp",
-			"name": "ofxPanel.cpp",
-			"sourceTree": "<group>"
-		},
-		"C73EA850-DF0D-49A2-B3C0-766772CDE5B3": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "GaussianXBlurShader.h",
-			"sourceTree": "<group>"
-		},
-		"CE12F58C-4CC2-4194-A5F4-20A4DEE8AF83": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.cpp",
-			"name": "ofxSlider.cpp",
-			"sourceTree": "<group>"
-		},
-		"CF5B7CE0-7D6E-43B1-A784-A1B26EDB5277": {
-			"children": [
-				"8E111774-7BB7-424A-B9EF-5966A8204E52",
-				"FE9FA69B-7743-4D03-8CB7-30239DEC82CE",
-				"C73EA850-DF0D-49A2-B3C0-766772CDE5B3",
-				"69130E8A-BAC8-470E-9C69-B73B0C8A7AE2",
-				"3FA031F1-97EC-4AA7-9C29-B93C9798DF16",
-				"A1A94C43-AAE7-45BE-AF93-B0C8B63B12C9",
-				"EF231475-3A9C-4163-B3BC-0C0F4237D65A",
-				"D588F704-D8A9-4540-AB05-3D9E8000C15D",
-				"66FE2BAC-E89E-4226-A59F-5026573B37D3",
-				"32C405C7-FE42-48DB-9727-5A6B7E4C2561",
-				"06D5788F-A7BC-42B5-9B0F-8756E0C2C4E3",
-				"9AE99639-E049-46B0-8A1E-437D820A6BBE"
-			],
-			"isa": "PBXGroup",
-			"name": "shaders",
-			"path": "shaders",
-			"sourceTree": "<group>"
-		},
-		"D588F704-D8A9-4540-AB05-3D9E8000C15D": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "RefractiveRectangleShader.h",
-			"sourceTree": "<group>"
-		},
-		"D60F3185-5BB0-4361-A5DB-38CC4AB08099": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "ofxToggle.h",
-			"sourceTree": "<group>"
-		},
-		"D834D21A-3606-4C48-BFEB-7DB236E6CD60": {
-			"children": [
-				"D93F5097-09C0-4DF2-94A4-EFBAF7FCD45C",
-				"F1C25917-CAA6-4314-BF3B-63F9D70749E3",
-				"B584D053-4BC4-4A73-9AFE-CB3722C3012A",
-				"ADA90AFA-9FDF-4A1D-B824-F459767BCC57",
-				"BE049A2C-AD78-4C34-9F5F-5C90B2B25E3C",
-				"865E1007-4B48-48FC-84A7-39B9E5AC007B",
-				"1135946B-FC1D-4F40-8628-8E49C741A355",
-				"6B298236-30D9-4BCA-9512-F3AA7D5FB71A",
-				"469EFA77-D970-44AF-9D13-87624975FF8A",
-				"CF5B7CE0-7D6E-43B1-A784-A1B26EDB5277"
-			],
-			"isa": "PBXGroup",
-			"name": "src",
-			"path": "src",
-			"sourceTree": "<group>"
-		},
-		"D93F5097-09C0-4DF2-94A4-EFBAF7FCD45C": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "Effect.h",
-			"sourceTree": "<group>"
-		},
-		"DA5CBA40-03A3-4900-9CA3-705569C93E6F": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "ofxPanel.h",
-			"sourceTree": "<group>"
-		},
-		"DAED3D17-C42C-43FB-A364-BA5851397F70": {
-			"children": [
-				"BBC59E73-077D-45EA-9F41-7F56DECCFEBF"
-			],
-			"isa": "PBXGroup",
-			"name": "ofxGui",
-			"path": "ofxGui",
-			"sourceTree": "<group>"
-		},
-		"DCF4271F-D5C0-4993-A416-BC2F22D67052": {
-			"fileRef": "54EE7AAB-9C9A-49BC-93F0-8F9F8B5174AF",
+		"2956506C-0F88-4E6E-8C91-F3E41943A8D4": {
+			"fileRef": "0BD34444-83B6-4EA8-BCB1-DF0B30B8467A",
 			"isa": "PBXBuildFile"
 		},
-		"DD90BC77-C771-423C-B9C0-1AE2FA350150": {
+		"30BDEDD4-B676-4196-BD5B-AD3778108007": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "LogisticFnShader.h",
+			"sourceTree": "<group>"
+		},
+		"31FF4DA1-1BC7-4F6E-B870-B06851EA4C0C": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "TonemapShader.h",
+			"sourceTree": "<group>"
+		},
+		"36F03887-263A-4E07-B0AC-C59A17BC1502": {
+			"children": [
+				"FFB4D44A-5B2B-4B04-ADC9-1F9B6B4FF7CB"
+			],
+			"isa": "PBXGroup",
+			"name": "ofxRenderer",
+			"path": "ofxRenderer",
+			"sourceTree": "<group>"
+		},
+		"37943EBD-6043-4B4D-ABDF-08527DF66EE8": {
+			"fileRef": "D0AB8DE0-42F1-484D-BB85-211688D3062F",
+			"isa": "PBXBuildFile"
+		},
+		"3B086D2E-34F8-4EB5-8849-5154AE86F33A": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "SubtractDivergenceShader.h",
+			"sourceTree": "<group>"
+		},
+		"40641E90-BADE-49F7-9455-BBE7A868E6B0": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "MaskShader.h",
+			"sourceTree": "<group>"
+		},
+		"45776D1D-D718-4B30-B5B1-08B9FF2BC405": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "ofxBaseGui.h",
+			"sourceTree": "<group>"
+		},
+		"4587C377-F9A0-4D70-8CF6-31AA46A4C860": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.cpp",
+			"name": "ofxLabel.cpp",
+			"sourceTree": "<group>"
+		},
+		"45AFEFD9-4598-4D3A-8C6B-90FDCDEFA322": {
+			"fileRef": "24DC86C5-0385-49A2-A0E7-C60F05E76427",
+			"isa": "PBXBuildFile"
+		},
+		"5075269C-BEFA-4E6A-8C3D-CFEB7A38D168": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.cpp",
+			"name": "ofxButton.cpp",
+			"sourceTree": "<group>"
+		},
+		"54ACFCD5-9AFA-4D51-BA90-17EFA7D6CBCB": {
+			"fileRef": "DBF86517-47CD-44AC-8D79-3008FD88DB25",
+			"isa": "PBXBuildFile"
+		},
+		"5DEBD2B4-E413-4ADB-B143-8BBD5FACB8C1": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "ThresholdedAddShader.h",
+			"sourceTree": "<group>"
+		},
+		"5DEC5860-19B9-4821-A207-6433D0F731A2": {
 			"fileEncoding": "4",
 			"isa": "PBXFileReference",
 			"lastKnownFileType": "sourcecode.cpp.h",
 			"name": "ofxGuiUtils.h",
 			"sourceTree": "<group>"
 		},
-		"E02074A2-83E5-430E-A373-5A3B1868CD01": {
+		"64951018-1EFC-49C9-B328-0E1E31ED6644": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "PingPongRenderer.h",
+			"sourceTree": "<group>"
+		},
+		"66ACC1AD-6570-4467-B829-9551053A684B": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "ofxInputField.h",
+			"sourceTree": "<group>"
+		},
+		"6DB8537F-7064-4CD3-8538-9D4AF96C5E86": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "Shader.h",
+			"sourceTree": "<group>"
+		},
+		"70D93EAA-0320-414B-A489-B9EA8A763C63": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "ApplyVorticityForceShader.h",
+			"sourceTree": "<group>"
+		},
+		"771A2D69-0FAA-46D7-BA63-E69F02235C95": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "InitShader.h",
+			"sourceTree": "<group>"
+		},
+		"7731F530-D26D-4BBF-8158-A57EB300E291": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.cpp",
+			"name": "ParticleField.cpp",
+			"sourceTree": "<group>"
+		},
+		"7F0E560C-44D0-4EB8-8875-924F2419EEE2": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "AdvectShader.h",
+			"sourceTree": "<group>"
+		},
+		"80B9E7C3-9467-484D-B838-173E0BD100B8": {
+			"fileRef": "D1989823-786A-4C38-BF6E-2538C4D23B36",
+			"isa": "PBXBuildFile"
+		},
+		"87BC82D2-2699-4226-BFF9-D30422FCEA8C": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "JacobiShader.h",
+			"sourceTree": "<group>"
+		},
+		"8FB5D663-AE95-4DFE-A796-BB1D9B68A25F": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "ofxPanel.h",
+			"sourceTree": "<group>"
+		},
+		"8FD6229D-BA1B-4841-B171-6A153F801E3B": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "TranslateEffect.h",
+			"sourceTree": "<group>"
+		},
+		"94AEDFE3-DB00-45A8-8701-978CEF7DF460": {
+			"fileRef": "7731F530-D26D-4BBF-8158-A57EB300E291",
+			"isa": "PBXBuildFile"
+		},
+		"95C3FB6D-70F7-4673-81F7-E51561FEFA66": {
+			"fileRef": "4587C377-F9A0-4D70-8CF6-31AA46A4C860",
+			"isa": "PBXBuildFile"
+		},
+		"97099F2A-2F1A-4640-B284-1393C0A793AB": {
+			"fileRef": "5075269C-BEFA-4E6A-8C3D-CFEB7A38D168",
+			"isa": "PBXBuildFile"
+		},
+		"9820E273-8898-4198-8D43-E3A3E9247926": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "ofxSlider.h",
+			"sourceTree": "<group>"
+		},
+		"9F7F5A69-980D-42B9-BF91-B00C27C0FF8A": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "SoftCircleShader.h",
+			"sourceTree": "<group>"
+		},
+		"A468D00A-76AA-47BE-9856-201AF7BAE55C": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "ClampShader.h",
+			"sourceTree": "<group>"
+		},
+		"AB477F97-3E9C-46D1-8DD4-1318EE678744": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.cpp",
+			"name": "ofxGuiGroup.cpp",
+			"sourceTree": "<group>"
+		},
+		"ACF2A5EE-568D-42A6-87C5-8D469249A933": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "ApplyBouyancyShader.h",
+			"sourceTree": "<group>"
+		},
+		"AFAE9397-2A38-456F-B91A-BD0743F77697": {
 			"children": [
-				"888E15BB-22A6-439F-B0A8-B394D2EA7D6E",
-				"2DB35EDF-BAD6-4528-B131-EE96BE132238",
-				"B5062FA6-50C9-4B69-8112-9BAA17D7D325",
-				"B75D74DA-9BFF-49EE-9C1A-FE323C9A9B57",
-				"E57F534F-9DB2-4779-8B3B-1089E84009EE",
-				"6809DFCF-B388-4A89-A81F-AEBEAFCABF34",
-				"3AE1BA35-1A58-465F-A272-CE145401917E"
+				"0868C1EA-9236-40E4-883C-177C225E65A7",
+				"A468D00A-76AA-47BE-9856-201AF7BAE55C",
+				"E6DFC04F-5B82-4432-B96C-5A63FDB5C436",
+				"064B589A-8607-41FC-814F-2176911FC9A4",
+				"30BDEDD4-B676-4196-BD5B-AD3778108007",
+				"40641E90-BADE-49F7-9455-BBE7A868E6B0",
+				"CC2567BD-243F-4CE8-87BA-1C0F9C8118DB",
+				"FD67270C-2358-43CF-85EF-4135C0D61811",
+				"DADA7F40-424B-4AC5-991C-A37E0A4E1A55",
+				"9F7F5A69-980D-42B9-BF91-B00C27C0FF8A",
+				"5DEBD2B4-E413-4ADB-B143-8BBD5FACB8C1",
+				"31FF4DA1-1BC7-4F6E-B870-B06851EA4C0C"
 			],
 			"isa": "PBXGroup",
-			"name": "src",
-			"path": "src",
+			"name": "shaders",
+			"path": "shaders",
+			"sourceTree": "<group>"
+		},
+		"B40FABDD-A778-49FE-AB20-4C3934E4F9B5": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "ofxButton.h",
+			"sourceTree": "<group>"
+		},
+		"B76CADFC-88A2-49B3-A105-231E0B66023F": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "ofxToggle.h",
+			"sourceTree": "<group>"
+		},
+		"B9F38A44-2BC8-4226-94DB-AADE3DF5DD53": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "AddRadialImpulseShader.h",
+			"sourceTree": "<group>"
+		},
+		"BB4B014C10F69532006C3DED": {
+			"children": [
+				"0EDE2F53-DA55-4BAD-A812-5B4262E1E85B",
+				"D79E4235-8A7A-4179-AB8D-B3DAFFCB40D2",
+				"36F03887-263A-4E07-B0AC-C59A17BC1502"
+			],
+			"isa": "PBXGroup",
+			"name": "addons",
+			"path": "../../../addons",
+			"sourceTree": "SOURCE_ROOT"
+		},
+		"BF7D90D1-A616-4E31-84B0-215BCEB2567F": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.cpp",
+			"name": "ofxPanel.cpp",
+			"sourceTree": "<group>"
+		},
+		"C32C479D-2DF3-410A-91A7-8B521539D431": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "OpenGLTimer.h",
+			"sourceTree": "<group>"
+		},
+		"C9D9F7BE-5355-49D4-9F20-E89442A2462C": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "UnitQuadMesh.h",
+			"sourceTree": "<group>"
+		},
+		"CC2567BD-243F-4CE8-87BA-1C0F9C8118DB": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "OpticalFlowShader.h",
+			"sourceTree": "<group>"
+		},
+		"CD8F7CC0-1084-46E0-BF84-AEE10049DD43": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "Effect.h",
+			"sourceTree": "<group>"
+		},
+		"D0AB8DE0-42F1-484D-BB85-211688D3062F": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.cpp",
+			"name": "ofxSliderGroup.cpp",
+			"sourceTree": "<group>"
+		},
+		"D1989823-786A-4C38-BF6E-2538C4D23B36": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.cpp",
+			"name": "ofxInputField.cpp",
+			"sourceTree": "<group>"
+		},
+		"D79E4235-8A7A-4179-AB8D-B3DAFFCB40D2": {
+			"children": [
+				"0B88E456-DD05-483D-86DD-DB91C03F4E07"
+			],
+			"isa": "PBXGroup",
+			"name": "ofxParticleField",
+			"path": "ofxParticleField",
+			"sourceTree": "<group>"
+		},
+		"D9DF150F-F0BA-4FD5-82BC-8DEA7A199200": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "folder",
+			"name": "data",
+			"path": "bin/data",
+			"sourceTree": "SOURCE_ROOT"
+		},
+		"DADA7F40-424B-4AC5-991C-A37E0A4E1A55": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "SmearShader.h",
+			"sourceTree": "<group>"
+		},
+		"DB858B2D-0224-4048-9D92-C29F255F9231": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.cpp",
+			"name": "ofxColorPicker.cpp",
+			"sourceTree": "<group>"
+		},
+		"DBF86517-47CD-44AC-8D79-3008FD88DB25": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.cpp",
+			"name": "ofxSlider.cpp",
+			"sourceTree": "<group>"
+		},
+		"E1238C28-265C-4D89-98FE-5C72005CED4E": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "PingPongFbo.h",
+			"sourceTree": "<group>"
+		},
+		"E1A4C1C0-631F-4D15-B6DD-4984C1FE0C96": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "ofxLabel.h",
 			"sourceTree": "<group>"
 		},
 		"E42962A92163ECCD00A6A9E2": {
@@ -618,7 +576,7 @@
 				"191EF70929D778A400F35F26",
 				"BB4B014C10F69532006C3DED",
 				"E4B69B5B0A3A1756003C02F2",
-				"FD35078D-57B8-4CE4-ABEE-C5BB08D1FCE7"
+				"D9DF150F-F0BA-4FD5-82BC-8DEA7A199200"
 			],
 			"isa": "PBXGroup",
 			"sourceTree": "<group>"
@@ -692,17 +650,17 @@
 			"files": [
 				"E4B69E200A3A1BDC003C02F2",
 				"E4B69E210A3A1BDC003C02F2",
-				"8873FE36-D959-42B0-9697-E33F09C14798",
-				"AFE52D0F-00F2-4204-AE3E-220832B796B1",
-				"ACE66464-76DE-4E2C-A1EE-CE68F1FA1D7F",
-				"2453861D-2C33-4D07-A38E-BF2BEAD72D7D",
-				"4A25EB16-BBFC-41B6-8E39-3DCD3DB5346D",
-				"DCF4271F-D5C0-4993-A416-BC2F22D67052",
-				"85C50E5A-5561-46F4-9987-FF6FA84FB99F",
-				"69DA4074-6DEC-4161-BFA9-7F0832E82E2F",
-				"8CBE7EB0-FA0C-48A0-BF62-19A163C4F0E4",
-				"3D2B7EBA-4C9A-4EEB-BEEC-8263D9641207",
-				"B60D4A2D-6DD6-4728-8B5A-DD67DFC70F26"
+				"2956506C-0F88-4E6E-8C91-F3E41943A8D4",
+				"97099F2A-2F1A-4640-B284-1393C0A793AB",
+				"E54FFFC7-907F-4F57-85EB-95F6C70EF924",
+				"FDACD026-79AB-4FDA-9470-BB04A2C0A0D6",
+				"80B9E7C3-9467-484D-B838-173E0BD100B8",
+				"95C3FB6D-70F7-4673-81F7-E51561FEFA66",
+				"F82CE22C-AA4B-4A4C-9A49-E131277A0D7B",
+				"54ACFCD5-9AFA-4D51-BA90-17EFA7D6CBCB",
+				"37943EBD-6043-4B4D-ABDF-08527DF66EE8",
+				"45AFEFD9-4598-4D3A-8C6B-90FDCDEFA322",
+				"94AEDFE3-DB00-45A8-8701-978CEF7DF460"
 			],
 			"isa": "PBXSourcesBuildPhase",
 			"runOnlyForDeploymentPostprocessing": "0"
@@ -867,61 +825,103 @@
 			"path": "Project.xcconfig",
 			"sourceTree": "<group>"
 		},
-		"E57F534F-9DB2-4779-8B3B-1089E84009EE": {
+		"E54FFFC7-907F-4F57-85EB-95F6C70EF924": {
+			"fileRef": "DB858B2D-0224-4048-9D92-C29F255F9231",
+			"isa": "PBXBuildFile"
+		},
+		"E5A8FB62-6479-4382-A403-D93AE808AF20": {
+			"children": [
+				"076C6A99-1594-4F8B-AA69-8EC13DBABA29",
+				"8FD6229D-BA1B-4841-B171-6A153F801E3B"
+			],
+			"isa": "PBXGroup",
+			"name": "effects",
+			"path": "effects",
+			"sourceTree": "<group>"
+		},
+		"E6DFC04F-5B82-4432-B96C-5A63FDB5C436": {
 			"fileEncoding": "4",
 			"isa": "PBXFileReference",
 			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "ParticleField.h",
+			"name": "GaussianXBlurShader.h",
 			"sourceTree": "<group>"
 		},
-		"EF231475-3A9C-4163-B3BC-0C0F4237D65A": {
+		"E9467190-4018-474C-AE19-75A958CABE03": {
 			"fileEncoding": "4",
 			"isa": "PBXFileReference",
 			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "OpticalFlowShader.h",
+			"name": "ofxSliderGroup.h",
 			"sourceTree": "<group>"
 		},
-		"F1BD75CD-AF32-4FE3-92B5-7A0D713182D7": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.cpp",
-			"name": "ofxInputField.cpp",
+		"EB6CC8E5-1798-4371-A62C-7A727D12A4D5": {
+			"children": [
+				"B9F38A44-2BC8-4226-94DB-AADE3DF5DD53",
+				"7F0E560C-44D0-4EB8-8875-924F2419EEE2",
+				"ACF2A5EE-568D-42A6-87C5-8D469249A933",
+				"70D93EAA-0320-414B-A489-B9EA8A763C63",
+				"2512CE45-01B7-4E21-BC14-21E27D6DD2DB",
+				"0D3DF8D7-DF4C-402C-9550-FAFF03419DD5",
+				"87BC82D2-2699-4226-BFF9-D30422FCEA8C",
+				"3B086D2E-34F8-4EB5-8849-5154AE86F33A",
+				"18930A56-5BD2-439A-A2F1-39D4B9FCB850"
+			],
+			"isa": "PBXGroup",
+			"name": "fluid",
+			"path": "fluid",
 			"sourceTree": "<group>"
 		},
-		"F1C25917-CAA6-4314-BF3B-63F9D70749E3": {
+		"F04B6319-0C4C-4752-84CA-1AC95702ED27": {
 			"fileEncoding": "4",
 			"isa": "PBXFileReference",
 			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "OpenGLTimer.h",
+			"name": "Renderer.h",
 			"sourceTree": "<group>"
 		},
-		"F40897A0-6691-40F0-B4F2-87489EA0FC55": {
+		"F2061D4C-8B61-40D4-B18B-47429510E05D": {
 			"fileEncoding": "4",
 			"isa": "PBXFileReference",
 			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "ofxInputField.h",
+			"name": "Constants.h",
 			"sourceTree": "<group>"
 		},
-		"FA11EF96-0DC4-45DF-9DAC-E658C9CEDE67": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "sourcecode.cpp.cpp",
-			"name": "ofxGuiGroup.cpp",
-			"sourceTree": "<group>"
-		},
-		"FD35078D-57B8-4CE4-ABEE-C5BB08D1FCE7": {
-			"fileEncoding": "4",
-			"isa": "PBXFileReference",
-			"lastKnownFileType": "folder",
-			"name": "data",
-			"path": "bin/data",
-			"sourceTree": "SOURCE_ROOT"
-		},
-		"FE9FA69B-7743-4D03-8CB7-30239DEC82CE": {
+		"F62ABA9A-B62F-4D0F-AABF-348BB031CAB6": {
 			"fileEncoding": "4",
 			"isa": "PBXFileReference",
 			"lastKnownFileType": "sourcecode.cpp.h",
-			"name": "ClampShader.h",
+			"name": "ofxGuiGroup.h",
+			"sourceTree": "<group>"
+		},
+		"F82CE22C-AA4B-4A4C-9A49-E131277A0D7B": {
+			"fileRef": "BF7D90D1-A616-4E31-84B0-215BCEB2567F",
+			"isa": "PBXBuildFile"
+		},
+		"FD67270C-2358-43CF-85EF-4135C0D61811": {
+			"fileEncoding": "4",
+			"isa": "PBXFileReference",
+			"lastKnownFileType": "sourcecode.cpp.h",
+			"name": "RefractiveRectangleShader.h",
+			"sourceTree": "<group>"
+		},
+		"FDACD026-79AB-4FDA-9470-BB04A2C0A0D6": {
+			"fileRef": "AB477F97-3E9C-46D1-8DD4-1318EE678744",
+			"isa": "PBXBuildFile"
+		},
+		"FFB4D44A-5B2B-4B04-ADC9-1F9B6B4FF7CB": {
+			"children": [
+				"CD8F7CC0-1084-46E0-BF84-AEE10049DD43",
+				"C32C479D-2DF3-410A-91A7-8B521539D431",
+				"E1238C28-265C-4D89-98FE-5C72005CED4E",
+				"64951018-1EFC-49C9-B328-0E1E31ED6644",
+				"F04B6319-0C4C-4752-84CA-1AC95702ED27",
+				"6DB8537F-7064-4CD3-8538-9D4AF96C5E86",
+				"C9D9F7BE-5355-49D4-9F20-E89442A2462C",
+				"E5A8FB62-6479-4382-A403-D93AE808AF20",
+				"EB6CC8E5-1798-4371-A62C-7A727D12A4D5",
+				"AFAE9397-2A38-456F-B91A-BD0743F77697"
+			],
+			"isa": "PBXGroup",
+			"name": "src",
+			"path": "src",
 			"sourceTree": "<group>"
 		}
 	},

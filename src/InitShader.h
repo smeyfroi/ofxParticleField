@@ -103,8 +103,7 @@ protected:
                   if (dataIndex == 0) {
                     fragColor = vec4(rnd.x, rnd.y, 0.0, 1.0);
                   } else if (dataIndex == 1) {
-                    vec2 velocity = (random2(pixelCoord, randomSeed + 123.456) - 0.5) * 0.4;
-                    fragColor = vec4(velocity, 0.0, 1.0);
+                    fragColor = vec4(0.0, 0.0, 0.0, 1.0);
                   } else if (dataIndex == 3) {
                     float weight = mix(minWeight, maxWeight, random(pixelCoord, randomSeed + 789.123));
                     fragColor = vec4(weight, 0.0, 0.0, 1.0);
