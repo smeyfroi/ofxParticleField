@@ -17,7 +17,7 @@ namespace ofxParticleField {
 class UpdateShader : public Shader {
   
 public:
-  void render(PingPongFbo& particleData, const ofTexture& field1Texture, const ofTexture& field2Texture, float field1ValueOffset, float field2ValueOffset, float velocityDamping, float forceMultiplier, float maxVelocity, float jitterStrength, float jitterSmoothing) {
+  void render(PingPongFbo& particleData, const ofTexture& field1Texture, const ofTexture& field2Texture, float field1ValueOffset, float field2ValueOffset, float field1Multiplier, float field2Multiplier, float velocityDamping, float forceMultiplier, float maxVelocity, float jitterStrength, float jitterSmoothing) {
     particleData.getTarget().begin();
     particleData.getTarget().activateAllDrawBuffers();
     shader.begin();
@@ -29,6 +29,8 @@ public:
     shader.setUniformTexture("field2Texture", field2Texture, 4);
     shader.setUniform1f("field1ValueOffset", field1ValueOffset);
     shader.setUniform1f("field2ValueOffset", field2ValueOffset);
+    shader.setUniform1f("field1Multiplier", field1Multiplier);
+    shader.setUniform1f("field2Multiplier", field2Multiplier);
     shader.setUniform1f("velocityDamping", velocityDamping);
     shader.setUniform1f("forceMultiplier", forceMultiplier);
     shader.setUniform1f("maxVelocity", maxVelocity);
@@ -68,6 +70,8 @@ protected:
                 uniform sampler2D field2Texture;
                 uniform float field1ValueOffset;
                 uniform float field2ValueOffset;
+                uniform float field1Multiplier;
+                uniform float field2Multiplier;
                 uniform float velocityDamping;
                 uniform float forceMultiplier;
                 uniform float maxVelocity;
@@ -91,7 +95,7 @@ protected:
                   float weight = texture(weightData, texCoordVarying).x;
                   vec2 field1 = texture(field1Texture, normalizedParticlePosition).xy + field1ValueOffset;
                   vec2 field2 = texture(field2Texture, normalizedParticlePosition).xy + field2ValueOffset;
-                  vec2 field = field1 + field2;
+                  vec2 field = field1 * field1Multiplier + field2 * field2Multiplier;
 
                   // FIXME: where are these NaNs coming from with the VideoFlowSourceMod?
                   if (isnan(field.x)) field.x = 0.0;

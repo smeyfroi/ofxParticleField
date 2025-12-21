@@ -40,6 +40,8 @@ public:
   ofParameter<float> speedThresholdParameter { "speedThreshold", 2.0, 0.1, 10.0 };
   ofParameter<float> minWeightParameter { "minWeight", 10.0, 1.0, 50.0 };
   ofParameter<float> maxWeightParameter { "maxWeight", 50.0, 1.0, 100.0 };
+  ofParameter<float> field1MultiplierParameter { "field1Multiplier", 1.0, 0.0, 2.0 };
+  ofParameter<float> field2MultiplierParameter { "field2Multiplier", 1.0, 0.0, 2.0 };
   ofParameterGroup& getParameterGroup();
   
 private:
