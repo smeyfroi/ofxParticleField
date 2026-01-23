@@ -48,7 +48,7 @@ public:
 
   std::string getParameterGroupName() const { return "Particle Field"; }
   ofParameterGroup parameters;
-  ofParameter<float> ln2ParticleCountParameter { "ln2ParticleCount", 14.0, 10.0, 22.0 };
+  ofParameter<float> ln2ParticleCountParameter { "ln2ParticleCount", 14.0, 10.0, 18.0 }; // 2^18 = 262K
   ofParameter<float> velocityDampingParameter { "velocityDamping", 0.997, 0.99, 1.0 };
   ofParameter<float> forceMultiplierParameter { "forceMultiplier", 1.0, 0.0, 5.0 };
   ofParameter<float> maxVelocityParameter { "maxVelocity", 0.001, 0.0, 0.01 };
