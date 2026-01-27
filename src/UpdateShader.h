@@ -115,8 +115,20 @@ protected:
                   velocity += jitterSmooth;
                   // velocity += jitterSmooth / weight; // Optional: also scale jitter by weight
                   velocity *= velocityDamping;
-                  
-                  outPosition = vec4(fract(normalizedParticlePosition + velocity*maxVelocity), 0.0, 1.0);
+
+                  // Hard safety clamp: limit per-step displacement in normalized coordinates.
+                  // Target: ~6px/frame at 3600px wide => 6/3600 = 0.001666...
+                  const float maxDisp = 0.0016667;
+                  vec2 disp = velocity * maxVelocity;
+                  float dispLen = length(disp);
+                  if (dispLen > maxDisp) {
+                    float scale = maxDisp / (dispLen + 1e-6);
+                    disp *= scale;
+                    // Keep stored velocity consistent with clamped displacement.
+                    velocity = disp / max(maxVelocity, 1e-6);
+                  }
+
+                  outPosition = vec4(fract(normalizedParticlePosition + disp), 0.0, 1.0);
                   outVelocity = vec4(velocity, 0.0, 1.0);
                   outJitter = vec4(jitterSmooth, 0.0, 1.0);
                   outWeight = vec4(weight, 0.0, 0.0, 1.0);
