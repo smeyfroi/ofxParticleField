@@ -83,8 +83,10 @@ protected:
 
                   // set alpha according to distance to center
                   float alpha = clamp(speed - r, 0.0, 1.0);
-                  fragColor = colorVarying;
-                  fragColor.a *= alpha;
+
+                  // Premultiplied alpha output.
+                  float a = clamp(colorVarying.a, 0.0, 1.0) * alpha;
+                  fragColor = vec4(colorVarying.rgb * a, a);
                 }
                 );
   }
