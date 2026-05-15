@@ -23,7 +23,7 @@ public:
     std::optional<float> particleSize;
     std::optional<float> jitterStrength;
     std::optional<float> jitterSmoothing;
-    std::optional<float> speedThreshold;
+    std::optional<float> motionSensitivity;
     std::optional<float> minWeight;
     std::optional<float> maxWeight;
     std::optional<float> field1Multiplier;
@@ -55,7 +55,7 @@ public:
   ofParameter<float> particleSizeParameter { "particleSize", 8.0, 1.0, 16.0 };
   ofParameter<float> jitterStrengthParameter { "jitterStrength", 0.01, 0.0, 0.05 };
   ofParameter<float> jitterSmoothingParameter { "jitterSmoothing", 0.1, 0.0, 1.0 };
-  ofParameter<float> speedThresholdParameter { "speedThreshold", 2.0, 0.1, 10.0 };
+  ofParameter<float> motionSensitivityParameter { "motionSensitivity", 2.0, 0.1, 10.0 };
   ofParameter<float> minWeightParameter { "minWeight", 10.0, 1.0, 50.0 };
   ofParameter<float> maxWeightParameter { "maxWeight", 50.0, 1.0, 100.0 };
   ofParameter<float> field1MultiplierParameter { "field1Multiplier", 1.0, 0.0, 2.0 };
@@ -69,7 +69,7 @@ private:
   float getParticleSizeEffective() const;
   float getJitterStrengthEffective() const;
   float getJitterSmoothingEffective() const;
-  float getSpeedThresholdEffective() const;
+  float getMotionSensitivityEffective() const;
   float getMinWeightEffective() const;
   float getMaxWeightEffective() const;
   float getField1MultiplierEffective() const;

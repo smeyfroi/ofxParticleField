@@ -37,7 +37,7 @@ void ParticleField::setParameterOverrides(const ParameterOverrides& overrides) {
       parameterOverrides.particleSize == overrides.particleSize &&
       parameterOverrides.jitterStrength == overrides.jitterStrength &&
       parameterOverrides.jitterSmoothing == overrides.jitterSmoothing &&
-      parameterOverrides.speedThreshold == overrides.speedThreshold &&
+      parameterOverrides.motionSensitivity == overrides.motionSensitivity &&
       parameterOverrides.minWeight == overrides.minWeight &&
       parameterOverrides.maxWeight == overrides.maxWeight &&
       parameterOverrides.field1Multiplier == overrides.field1Multiplier &&
@@ -80,8 +80,8 @@ float ParticleField::getJitterSmoothingEffective() const {
   return parameterOverrides.jitterSmoothing.value_or(jitterSmoothingParameter.get());
 }
 
-float ParticleField::getSpeedThresholdEffective() const {
-  return parameterOverrides.speedThreshold.value_or(speedThresholdParameter.get());
+float ParticleField::getMotionSensitivityEffective() const {
+  return parameterOverrides.motionSensitivity.value_or(motionSensitivityParameter.get());
 }
 
 float ParticleField::getMinWeightEffective() const {
@@ -254,7 +254,7 @@ void ParticleField::update() {
 
 void ParticleField::draw(ofFbo& foregroundFbo, bool smallParticles) {
   float particleSize = smallParticles ? smallParticleSize() : getParticleSizeEffective();
-  drawShader.render(mesh, foregroundFbo, particleDataFbo, particleSize, getSpeedThresholdEffective());
+  drawShader.render(mesh, foregroundFbo, particleDataFbo, particleSize, getMotionSensitivityEffective());
 }
 
 void ParticleField::onLn2ParticleCountChanged(float& value) {
@@ -273,7 +273,7 @@ ofParameterGroup& ParticleField::getParameterGroup() {
     parameters.add(particleSizeParameter);
     parameters.add(jitterStrengthParameter);
     parameters.add(jitterSmoothingParameter);
-    parameters.add(speedThresholdParameter);
+    parameters.add(motionSensitivityParameter);
     parameters.add(minWeightParameter);
     parameters.add(maxWeightParameter);
     parameters.add(field1MultiplierParameter);

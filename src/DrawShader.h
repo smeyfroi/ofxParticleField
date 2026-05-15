@@ -17,7 +17,7 @@ namespace ofxParticleField {
 class DrawShader : public Shader {
   
 public:
-  void render(const ofVboMesh& mesh, const ofFbo& fbo, PingPongFbo& particleData, float pointSize, float speedThreshold) {
+  void render(const ofVboMesh& mesh, const ofFbo& fbo, PingPongFbo& particleData, float pointSize, float motionSensitivity) {
     ofPushStyle();
     glEnable(GL_PROGRAM_POINT_SIZE);
     fbo.begin();
@@ -27,7 +27,7 @@ public:
     shader.setUniform1i("renderW", fbo.getWidth());
     shader.setUniform1i("renderH", fbo.getHeight());
     shader.setUniform1f("pointSize", pointSize);
-    shader.setUniform1f("speedThreshold", speedThreshold);
+    shader.setUniform1f("motionSensitivity", motionSensitivity);
     mesh.draw();
     shader.end();
     fbo.end();
@@ -66,7 +66,7 @@ protected:
                 in vec2 texCoordVarying;
                 in vec4 colorVarying;
                 uniform sampler2DRect velocityData;
-                uniform float speedThreshold;
+                uniform float motionSensitivity;
                 out vec4 fragColor;
                 
                 void main(void) {
@@ -79,7 +79,7 @@ protected:
                   
                   vec4 particleVelocity = texture(velocityData, texCoordVarying);
                   float speed = length(particleVelocity.xy);
-                  speed = smoothstep(0.0, 1.0, speed * speedThreshold);
+                  speed = smoothstep(0.0, 1.0, speed * motionSensitivity);
 
                   // set alpha according to distance to center
                   float alpha = clamp(speed - r, 0.0, 1.0);
