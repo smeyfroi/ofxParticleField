@@ -23,6 +23,7 @@ void ParticleField::setup(ofFloatColor particleColor_, float field1ValueOffset_,
   field2ValueOffset = field2ValueOffset_;
 
   drawShader.load();
+  darkenDrawShader.load();
   updateShader.load();
   initShader.load();
 
@@ -255,6 +256,41 @@ void ParticleField::update() {
 void ParticleField::draw(ofFbo& foregroundFbo, bool smallParticles) {
   float particleSize = smallParticles ? smallParticleSize() : getParticleSizeEffective();
   drawShader.render(mesh, foregroundFbo, particleDataFbo, particleSize, getMotionSensitivityEffective());
+}
+
+void ParticleField::drawDarken(ofFbo& foregroundFbo, bool smallParticles) {
+  // Lazy-allocate / re-size scratch FBO to match the foreground FBO. Match
+  // the same internal format (most likely GL_RGBA32F / GL_RGBA16F for the
+  // drawing layers).
+  const int fgW = static_cast<int>(foregroundFbo.getWidth());
+  const int fgH = static_cast<int>(foregroundFbo.getHeight());
+  if (!darkenScratchFbo.isAllocated()
+      || darkenScratchFbo.getWidth() != fgW
+      || darkenScratchFbo.getHeight() != fgH) {
+    ofFboSettings settings;
+    settings.width = fgW;
+    settings.height = fgH;
+    settings.internalformat = foregroundFbo.getTexture().getTextureData().glInternalFormat;
+    settings.textureTarget = GL_TEXTURE_2D;
+    settings.useDepth = false;
+    darkenScratchFbo.allocate(settings);
+  }
+
+  // Snapshot the destination into the scratch FBO. Use ofDisableBlendMode so
+  // the copy is exact (no source-alpha modulation), then restore the caller's
+  // expected default after the copy.
+  darkenScratchFbo.begin();
+  ofClear(0, 0);
+  ofDisableBlendMode();
+  foregroundFbo.draw(0, 0, fgW, fgH);
+  darkenScratchFbo.end();
+
+  // Render the darken pass. The shader reads scratchFbo and writes the
+  // computed pixel value directly into foregroundFbo with blend off.
+  float particleSize = smallParticles ? smallParticleSize() : getParticleSizeEffective();
+  darkenDrawShader.render(mesh, foregroundFbo, particleDataFbo,
+                          darkenScratchFbo.getTexture(),
+                          particleSize, getMotionSensitivityEffective());
 }
 
 void ParticleField::onLn2ParticleCountChanged(float& value) {
